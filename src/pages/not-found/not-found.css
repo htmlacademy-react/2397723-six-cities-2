@@ -1,7 +1,6 @@
 .not-found-container {
   display: flex;
   height: 100vh;
-  width: 100%;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -16,13 +15,13 @@
 }
 
 .information--text {
-  font-size:3vh;
+  font-size: 1.5rem;
   font-weight: bold;
-  margin: 0 0 2vh 0;
+  margin-bottom: 0.5rem;
 }
 
 .error {
-  font-size: 7vh;
+  font-size: 3rem;
 }
 
 .not-found-image  {
