@@ -1,14 +1,16 @@
 import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from '../../pages/app-routes';
+import { Offer } from '../../types/offer';
 
 type AppProps = {
   placesCount: number;
+  offers: Offer[];
 }
 
-function App({placesCount}: AppProps): JSX.Element {
+function App({ placesCount, offers }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
-      <AppRoutes placesCount={placesCount}/>
+      <AppRoutes placesCount={placesCount} offers={offers} />
     </BrowserRouter>
   );
 }

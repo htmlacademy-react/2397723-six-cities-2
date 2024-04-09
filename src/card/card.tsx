@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Offer } from '../../types/offer';
+import React from 'react';
+import { Offer } from '../types/offer';
 
 type CardProps = {
   offer: Offer;
-  isOrdinaryCard?: boolean;
 }
 
 function PremiumLabel(): React.JSX.Element {
@@ -14,34 +13,16 @@ function PremiumLabel(): React.JSX.Element {
   );
 }
 
-export default function Card({ offer, isOrdinaryCard = true }: CardProps): React.JSX.Element {
-
-  const [active, setActive] = useState<string>();
-
-  useEffect(() => {
-    setActive('b312baee-786b-43bd-9fba-c19f0da74abc');
-  }, [active]);
-
+export default function Card({ offer }: CardProps): React.JSX.Element {
   return (
-    <article
-      className={`${isOrdinaryCard ? 'cities__card' : 'favorites__card'} place-card`}
-      style={{
-        opacity: active === offer.id ? '0.6' : ''
-      }}
-    >
+    <article className="cities__card place-card">
       {offer.isPremium && <PremiumLabel />}
-      <div className={`${isOrdinaryCard ? 'cities__image-wrapper' : 'favorites__image-wrapper'} place-card__image-wrapper`}>
+      <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img
-            className="place-card__image"
-            src={offer.previewImage}
-            width={isOrdinaryCard ? '260' : '150'}
-            height={isOrdinaryCard ? '200' : '110'}
-            alt="Place image"
-          />
+          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
         </a>
       </div>
-      <div className={`${!isOrdinaryCard ? 'favorites__card-info' : ''} place-card__info`}>
+      <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">{offer.price}</b>
@@ -65,6 +46,6 @@ export default function Card({ offer, isOrdinaryCard = true }: CardProps): React
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
-    </article >
+    </article>
   );
 }
