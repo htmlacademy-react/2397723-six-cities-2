@@ -1,18 +1,24 @@
 import React from 'react';
 import { Offer } from '../../types/offer';
-import { CityName } from '../../const/const';
+import { CardType, CityName } from '../../const/const';
 import Card from '../card/card';
 
 type FavoritesListProps = {
-  offers: Offer[];
+  favoriteOffers: Offer[];
+  changeCurrentOffer: (id: string) => void;
 }
 
 type LiCompProps = {
   city: string;
   cityOffers?: Offer[];
+  changeCurrentOffer: (id: string) => void;
 }
 
-function LiComp({ city, cityOffers }: LiCompProps): React.JSX.Element {
+function getCityOffers(cityName: CityName, favoriteOffers: Offer[]): Offer[] | undefined {
+  return favoriteOffers.filter((offer: Offer): boolean => offer.city.name === cityName);
+}
+
+function CityOffers({ city, cityOffers, changeCurrentOffer }: LiCompProps): React.JSX.Element {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -23,24 +29,32 @@ function LiComp({ city, cityOffers }: LiCompProps): React.JSX.Element {
         </div>
       </div>
       <div className="favorites__places">
-        {cityOffers?.map((offer: Offer): React.JSX.Element => <Card key={offer.id} offer={offer} isOrdinaryCard={false} />)}
+        {cityOffers?.map((offer: Offer): React.JSX.Element => (
+          <Card
+            key={offer.id}
+            offer={offer}
+            cardType={CardType.Favorites}
+            changeCurrentOffer={changeCurrentOffer}
+          />))}
       </div>
     </li>
   );
 }
 
-function getCityOffers(cityName: CityName, offers: Offer[]): Offer[] | undefined {
-  return offers.filter((offer: Offer): boolean => offer.city.name === cityName);
-}
-
-export default function FavoritesList({ offers }: FavoritesListProps): React.JSX.Element {
+export default function FavoritesList({ favoriteOffers, changeCurrentOffer }: FavoritesListProps): React.JSX.Element {
   const test = Object.values(CityName);
   return (
     <ul className="favorites__list">
       {test.map((name: CityName) => {
-        const cityOffers = getCityOffers(name, offers);
+        const cityOffers = getCityOffers(name, favoriteOffers);
         if (cityOffers && cityOffers.length > 0) {
-          return <LiComp key={name} city={name} cityOffers={cityOffers} />;
+          return (
+            <CityOffers
+              key={name}
+              city={name}
+              cityOffers={cityOffers}
+              changeCurrentOffer={changeCurrentOffer}
+            />);
         }
       })}
     </ul>

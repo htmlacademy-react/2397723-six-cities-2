@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Offer } from '../../types/offer';
+import { Link } from 'react-router-dom';
+import { AppRoute, CardType } from '../../const/const';
+import PremiumLabel from '../premium-label/premium-label';
+
+//TODO Сделать функцию для расчета процентов рейтинга
+//TODO Вынести в константы длину и ширину фото
 
 type CardProps = {
   offer: Offer;
-  isOrdinaryCard?: boolean;
+  cardType: CardType;
+  changeCurrentOffer(id: string): void;
 }
 
-function PremiumLabel(): React.JSX.Element {
-  return (
-    <div className="place-card__mark">
-      <span>Premium</span>
-    </div>
-  );
-}
-
-export default function Card({ offer, isOrdinaryCard = true }: CardProps): React.JSX.Element {
-
+export default function Card({ offer, cardType, changeCurrentOffer }: CardProps): React.JSX.Element {
   const [active, setActive] = useState<string>();
 
   useEffect(() => {
@@ -24,24 +22,24 @@ export default function Card({ offer, isOrdinaryCard = true }: CardProps): React
 
   return (
     <article
-      className={`${isOrdinaryCard ? 'cities__card' : 'favorites__card'} place-card`}
+      className={`${cardType}__card place-card`}
       style={{
-        opacity: active === offer.id ? '0.6' : ''
+        opacity: (cardType === CardType.Cities && active === offer.id) ? '0.6' : ''
       }}
     >
       {offer.isPremium && <PremiumLabel />}
-      <div className={`${isOrdinaryCard ? 'cities__image-wrapper' : 'favorites__image-wrapper'} place-card__image-wrapper`}>
+      <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
           <img
             className="place-card__image"
             src={offer.previewImage}
-            width={isOrdinaryCard ? '260' : '150'}
-            height={isOrdinaryCard ? '200' : '110'}
+            width={cardType === CardType.Favorites ? '150' : '260'}
+            height={cardType === CardType.Favorites ? '110' : '200'}
             alt="Place image"
           />
         </a>
       </div>
-      <div className={`${!isOrdinaryCard ? 'favorites__card-info' : ''} place-card__info`}>
+      <div className={`${cardType === CardType.Favorites ? 'favorites__card-info' : ''} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">{offer.price}</b>
@@ -61,7 +59,7 @@ export default function Card({ offer, isOrdinaryCard = true }: CardProps): React
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <Link to={AppRoute.Offer + offer.id} onClick={() => changeCurrentOffer(offer.id)}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
