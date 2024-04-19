@@ -1,5 +1,5 @@
-import Card from '../../components/card/card';
-import { CardType } from '../../const/const';
+import React from 'react';
+import CardList from '../../components/card-list/card-list';
 import { Offer } from '../../types/offer';
 
 type MainPageProps = {
@@ -8,7 +8,7 @@ type MainPageProps = {
   changeCurrentOffer: (id: string) => void;
 }
 
-export default function Main({ placesCount, offers, changeCurrentOffer }: MainPageProps): JSX.Element {
+export default function Main({ placesCount, offers, changeCurrentOffer }: MainPageProps): React.JSX.Element {
   return (
     <div className="page page--gray page--main">
       <main className="page__main page__main--index">
@@ -69,9 +69,7 @@ export default function Main({ placesCount, offers, changeCurrentOffer }: MainPa
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => <Card key={offer.id} offer={offer} cardType={CardType.Cities} changeCurrentOffer={changeCurrentOffer} />)};
-              </div>
+              <CardList offers={offers} changeCurrentOffer={changeCurrentOffer} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

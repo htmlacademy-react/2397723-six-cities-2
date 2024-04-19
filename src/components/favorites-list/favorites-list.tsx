@@ -1,14 +1,14 @@
 import React from 'react';
 import { Offer } from '../../types/offer';
-import { CardType, CityName } from '../../const/const';
-import Card from '../card/card';
+import { CityName } from '../../const/const';
+import FavoritesCard from '../favorites-card/favorites-card';
 
 type FavoritesListProps = {
   favoriteOffers: Offer[];
   changeCurrentOffer: (id: string) => void;
 }
 
-type LiCompProps = {
+type CityOffersProps = {
   city: string;
   cityOffers?: Offer[];
   changeCurrentOffer: (id: string) => void;
@@ -18,7 +18,7 @@ function getCityOffers(cityName: CityName, favoriteOffers: Offer[]): Offer[] | u
   return favoriteOffers.filter((offer: Offer): boolean => offer.city.name === cityName);
 }
 
-function CityOffers({ city, cityOffers, changeCurrentOffer }: LiCompProps): React.JSX.Element {
+function CityOffers({ city, cityOffers, changeCurrentOffer }: CityOffersProps): React.JSX.Element {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -30,10 +30,9 @@ function CityOffers({ city, cityOffers, changeCurrentOffer }: LiCompProps): Reac
       </div>
       <div className="favorites__places">
         {cityOffers?.map((offer: Offer): React.JSX.Element => (
-          <Card
+          <FavoritesCard
             key={offer.id}
             offer={offer}
-            cardType={CardType.Favorites}
             changeCurrentOffer={changeCurrentOffer}
           />))}
       </div>

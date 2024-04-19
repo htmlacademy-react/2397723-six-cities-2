@@ -2,8 +2,7 @@ export enum AppRoute {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
-  Offer = '/offer/',
-  Room = ':id'
+  Offer = '/offer/:id',
 }
 
 export enum AuthorizationStatus {
@@ -19,10 +18,4 @@ export enum CityName {
   Amsterdam = 'Amsterdam',
   Hamburg = 'Hamburg',
   Dusseldorf = 'Dusseldorf'
-}
-
-export enum CardType {
-  Cities = 'cities',
-  Favorites = 'favorites',
-  NearPlaces = 'near-places'
 }

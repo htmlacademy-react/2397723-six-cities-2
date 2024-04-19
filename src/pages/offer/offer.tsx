@@ -2,16 +2,24 @@ import { Offer } from '../../types/offer';
 import NotFound from '../not-found/not-found';
 import PremiumLabel from '../../components/premium-label/premium-label';
 import CommentForm from '../../components/comment-form/comment-form';
-import Card from '../../components/card/card';
-import { CardType } from '../../const/const';
+import NearPlacesCard from '../../components/near-places-card/near-places-card';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { ratingToPercent } from '../../utils/common';
 
 type RoomProps = {
   offer: Offer | undefined;
   nearOffers: Offer[];
-  changeCurrentOffer: (id: string) => void;
+  changeCurrentOffer: (id: string | undefined) => void;
 }
 
-export default function Room({ offer, nearOffers, changeCurrentOffer }: RoomProps): JSX.Element {
+export default function Room({ offer, nearOffers, changeCurrentOffer }: RoomProps): React.JSX.Element {
+  const currentOfferId = useParams();
+
+  useEffect(() => {
+    changeCurrentOffer(currentOfferId.id);
+  }, [offer]);
+
   if (!offer) {
     return <NotFound />;
   }
@@ -57,7 +65,7 @@ export default function Room({ offer, nearOffers, changeCurrentOffer }: RoomProp
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{ width: `${offer.rating / 5 * 100}%` }}></span>
+                  <span style={{ width: ratingToPercent(offer.rating) }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">{offer.rating}</span>
@@ -172,10 +180,9 @@ export default function Room({ offer, nearOffers, changeCurrentOffer }: RoomProp
             <div className="near-places__list places__list">
               {
                 nearOffers.map((nearOffer) => (
-                  <Card
+                  <NearPlacesCard
                     key={nearOffer.id}
                     offer={nearOffer}
-                    cardType={CardType.NearPlaces}
                     changeCurrentOffer={changeCurrentOffer}
                   />
                 )

@@ -8,20 +8,20 @@ import NotFound from './not-found/not-found';
 import Main from './main/main';
 import { Offer } from '../types/offer';
 import HeaderLayout from '../components/header/header-layout';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 type AppRoutesProps = {
   placesCount: number;
   offers: Offer[];
 }
 
-export default function AppRoutes({ placesCount, offers }: AppRoutesProps): JSX.Element {
+export default function AppRoutes({ placesCount, offers }: AppRoutesProps): React.JSX.Element {
   // TODO Попробовать react-helmet-async, ретроспектива 3.8 - 1:10:00
 
   //TODO эта часть кода временная, для того, чтобы передавать в компонент Room только одно конкретное предложение и конкретный список похожих предложений
   const [currentOffer, setCurrentOffer] = useState<Offer | undefined>();
   const [nearOffers, setNearOffers] = useState<Offer[]>(offers);
-  const setOffer = (offerId: string) => {
+  const setOffer = (offerId: string | undefined) => {
     const offer: Offer | undefined = offers.find((item) => item.id === offerId);
     const newNearOffers = offers.filter((nearOffer) => nearOffer.id !== offer?.id);
     setNearOffers(newNearOffers);
@@ -50,7 +50,7 @@ export default function AppRoutes({ placesCount, offers }: AppRoutesProps): JSX.
           element={<Login />}
         />
         <Route
-          path={AppRoute.Offer + AppRoute.Room}
+          path={AppRoute.Offer}
           element={<Room offer={currentOffer} nearOffers={nearOffers} changeCurrentOffer={setOffer}/>}
         />
         <Route

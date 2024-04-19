@@ -1,4 +1,6 @@
-export default function Login(): JSX.Element {
+import React from 'react';
+
+export default function Login(): React.JSX.Element {
   return (
     <div className="page page--gray page--login">
       <main className="page__main page__main--login">

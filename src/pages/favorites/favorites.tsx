@@ -1,3 +1,4 @@
+import React from 'react';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import { Offer } from '../../types/offer';
 
@@ -7,7 +8,7 @@ type FavoritesProps = {
   changeCurrentOffer: (id: string) => void;
 }
 
-export default function Favorites({ offers, changeCurrentOffer }: FavoritesProps): JSX.Element {
+export default function Favorites({ offers, changeCurrentOffer }: FavoritesProps): React.JSX.Element {
   return (
     <div className="page">
       <main className="page__main page__main--favorites">
