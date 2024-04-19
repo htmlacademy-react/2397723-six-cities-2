@@ -8,7 +8,7 @@ type CardListProps = {
   changeCurrentOffer: (id: string) => void;
 }
 
-export default function CardList({ offers, changeCurrentOffer }: CardListProps): React.JSX.Element {
+export default function CitiesCardList({ offers, changeCurrentOffer }: CardListProps): React.JSX.Element {
   const [active, setActive] = useState<string>();
   return (
     <div className="cities__places-list places__list tabs__content">

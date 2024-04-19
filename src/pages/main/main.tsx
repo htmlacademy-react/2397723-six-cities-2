@@ -1,5 +1,5 @@
 import React from 'react';
-import CardList from '../../components/card-list/card-list';
+import CitiesCardList from '../../components/card-list/card-list';
 import { Offer } from '../../types/offer';
 
 type MainPageProps = {
@@ -69,7 +69,7 @@ export default function Main({ placesCount, offers, changeCurrentOffer }: MainPa
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CardList offers={offers} changeCurrentOffer={changeCurrentOffer} />
+              <CitiesCardList offers={offers} changeCurrentOffer={changeCurrentOffer} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
