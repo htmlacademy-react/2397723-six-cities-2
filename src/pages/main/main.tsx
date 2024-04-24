@@ -4,13 +4,13 @@ import { Offer } from '../../types/offer';
 import Map from '../../components/map/map';
 import { Amsterdam } from '../../const/const';
 
-type MainPageProps = {
+type Props = {
   placesCount: number;
   offers: Offer[];
   changeCurrentOffer: (id: string) => void;
 }
 
-export default function Main({ placesCount, offers, changeCurrentOffer }: MainPageProps): React.JSX.Element {
+export default function Main({ placesCount, offers, changeCurrentOffer }: Props): React.JSX.Element {
   const [selectedOffer, setSelectedPoint] = useState<Offer | undefined>(
     undefined
   );

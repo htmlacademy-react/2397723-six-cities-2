@@ -10,12 +10,12 @@ import { Offer } from '../types/offer';
 import HeaderLayout from '../components/header/header-layout';
 import React, { useState } from 'react';
 
-type AppRoutesProps = {
+type Props = {
   placesCount: number;
   offers: Offer[];
 }
 
-export default function AppRoutes({ placesCount, offers }: AppRoutesProps): React.JSX.Element {
+export default function AppRoutes({ placesCount, offers }: Props): React.JSX.Element {
   // TODO Попробовать react-helmet-async, ретроспектива 3.8 - 1:10:00
 
   //TODO эта часть кода временная, для того, чтобы передавать в компонент Room только одно конкретное предложение и конкретный список похожих предложений

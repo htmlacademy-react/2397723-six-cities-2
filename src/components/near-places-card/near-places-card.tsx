@@ -4,13 +4,12 @@ import { AppRoute } from '../../const/const';
 import PremiumLabel from '../premium-label/premium-label';
 import { ratingToPercent } from '../../utils/common';
 
-type CardProps = {
+type Props = {
   offer: Offer;
   changeCurrentOffer(id: string): void;
 }
 
-export default function NearPlacesCard({ offer, changeCurrentOffer }: CardProps): React.JSX.Element {
-
+export default function NearPlacesCard({ offer, changeCurrentOffer }: Props): React.JSX.Element {
   return (
     <article
       className="near-places__card place-card"
