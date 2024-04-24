@@ -16,8 +16,8 @@ export const offers: Offer[] = [
       }
     },
     location: {
-      latitude: 48.868610000000004,
-      longitude: 2.342499,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 16
     },
     isFavorite: false,
@@ -39,8 +39,8 @@ export const offers: Offer[] = [
       }
     },
     location: {
-      latitude: 50.916361,
-      longitude: 6.944974,
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
       zoom: 16
     },
     isFavorite: false,
@@ -62,8 +62,8 @@ export const offers: Offer[] = [
       }
     },
     location: {
-      latitude: 50.867557,
-      longitude: 4.371696999999999,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
       zoom: 16
     },
     isFavorite: false,
@@ -85,8 +85,8 @@ export const offers: Offer[] = [
       }
     },
     location: {
-      latitude: 52.36554,
-      longitude: 4.911976,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
       zoom: 16
     },
     isFavorite: false,
