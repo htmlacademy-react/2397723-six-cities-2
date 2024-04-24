@@ -6,16 +6,16 @@ import PremiumLabel from '../premium-label/premium-label';
 
 type CardProps = {
   offer: Offer;
-  setActive(id: string): void;
+  onOffersItemHover(id: string): void;
   changeCurrentOffer(id: string): void;
 }
 
-export default function CitiesCard({ offer, setActive, changeCurrentOffer }: CardProps): React.JSX.Element {
+export default function CitiesCard({ offer, onOffersItemHover, changeCurrentOffer }: CardProps): React.JSX.Element {
 
   return (
     <article
       className="cities__card place-card"
-      onMouseEnter={() => setActive(offer.id)}
+      onMouseEnter={() => onOffersItemHover(offer.id)}
     >
       {offer.isPremium && <PremiumLabel />}
       <div className="cities__image-wrapper place-card__image-wrapper">
