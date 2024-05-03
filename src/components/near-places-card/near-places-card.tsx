@@ -10,13 +10,18 @@ type Props = {
 }
 
 export default function NearPlacesCard({ offer, changeCurrentOffer }: Props): React.JSX.Element {
+
+  const handleCurrentOfferChange = (): void => {
+    changeCurrentOffer(offer.id);
+  };
+
   return (
     <article
       className="near-places__card place-card"
     >
       {offer.isPremium && <PremiumLabel />}
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={handleCurrentOfferChange}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -24,7 +29,7 @@ export default function NearPlacesCard({ offer, changeCurrentOffer }: Props): Re
             height="200"
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -46,7 +51,7 @@ export default function NearPlacesCard({ offer, changeCurrentOffer }: Props): Re
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={generatePath(AppRoute.Offer, {id: offer.id})} onClick={() => changeCurrentOffer(offer.id)}>{offer.title}</Link>
+          <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={handleCurrentOfferChange}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

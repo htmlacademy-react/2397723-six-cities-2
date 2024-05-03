@@ -10,13 +10,18 @@ type Props = {
 }
 
 export default function FavoritesCard({ offer, changeCurrentOffer }: Props): React.JSX.Element {
+
+  const handleCurrentOfferChange = (): void => {
+    changeCurrentOffer(offer.id);
+  };
+
   return (
     <article
       className="favorites__card place-card"
     >
       {offer.isPremium && <PremiumLabel />}
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={() => changeCurrentOffer(offer.id)}>
+        <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={handleCurrentOfferChange}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -46,7 +51,7 @@ export default function FavoritesCard({ offer, changeCurrentOffer }: Props): Rea
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={() => changeCurrentOffer(offer.id)}>{offer.title}</Link>
+          <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={handleCurrentOfferChange}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
