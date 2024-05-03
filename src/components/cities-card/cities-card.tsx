@@ -4,22 +4,21 @@ import { AppRoute } from '../../const/const';
 import { ratingToPercent } from '../../utils/common';
 import PremiumLabel from '../premium-label/premium-label';
 
-type CardProps = {
+type Props = {
   offer: Offer;
-  setActive(id: string): void;
+  onOffersItemHover(id: string): void;
   changeCurrentOffer(id: string): void;
 }
 
-export default function CitiesCard({ offer, setActive, changeCurrentOffer }: CardProps): React.JSX.Element {
-
+export default function CitiesCard({ offer, onOffersItemHover, changeCurrentOffer }: Props): React.JSX.Element {
   return (
     <article
       className="cities__card place-card"
-      onMouseEnter={() => setActive(offer.id)}
+      onMouseEnter={() => onOffersItemHover(offer.id)}
     >
       {offer.isPremium && <PremiumLabel />}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={() => changeCurrentOffer(offer.id)}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -27,7 +26,7 @@ export default function CitiesCard({ offer, setActive, changeCurrentOffer }: Car
             height="200"
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -49,7 +48,7 @@ export default function CitiesCard({ offer, setActive, changeCurrentOffer }: Car
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={generatePath(AppRoute.Offer, {id: offer.id})} onClick={() => changeCurrentOffer(offer.id)}>{offer.title}</Link>
+          <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={() => changeCurrentOffer(offer.id)}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

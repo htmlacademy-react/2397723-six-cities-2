@@ -5,7 +5,7 @@ type ratingInput = {
   title: string;
 }
 
-type ratingInputProps = {
+type Props = {
   value: string;
   title: string;
   handleInputChange: (value: string) => void | undefined;
@@ -38,7 +38,7 @@ const INITIAL_RATING = '0';
 const INITIAL_COMMENT = '';
 const MIN_COMMENT_LENGTH = 50;
 
-function RatingInput({ value, title, handleInputChange }: ratingInputProps): React.JSX.Element {
+function RatingInput({ value, title, handleInputChange }: Props): React.JSX.Element {
   return (
     <>
       <input

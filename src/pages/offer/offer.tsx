@@ -7,13 +7,13 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { ratingToPercent } from '../../utils/common';
 
-type RoomProps = {
+type Props = {
   offer: Offer | undefined;
   nearOffers: Offer[];
   changeCurrentOffer: (id: string | undefined) => void;
 }
 
-export default function Room({ offer, nearOffers, changeCurrentOffer }: RoomProps): React.JSX.Element {
+export default function Room({ offer, nearOffers, changeCurrentOffer }: Props): React.JSX.Element {
   const currentOfferId = useParams();
 
   useEffect(() => {

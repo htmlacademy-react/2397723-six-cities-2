@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CitiesCardList from '../../components/card-list/card-list';
 import { Offer } from '../../types/offer';
+import Map from '../../components/map/map';
+import { Amsterdam } from '../../const/const';
 
-type MainPageProps = {
+type Props = {
   placesCount: number;
   offers: Offer[];
   changeCurrentOffer: (id: string) => void;
 }
 
-export default function Main({ placesCount, offers, changeCurrentOffer }: MainPageProps): React.JSX.Element {
+export default function Main({ placesCount, offers, changeCurrentOffer }: Props): React.JSX.Element {
+  const [selectedOffer, setSelectedPoint] = useState<Offer | undefined>(
+    undefined
+  );
+
+  const handleOffersItemHover = (offerId: string) => {
+    const currentOffer = offers.find((offer) => offer.id === offerId);
+    setSelectedPoint(currentOffer);
+  };
+
   return (
     <div className="page page--gray page--main">
       <main className="page__main page__main--index">
@@ -69,10 +80,14 @@ export default function Main({ placesCount, offers, changeCurrentOffer }: MainPa
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CitiesCardList offers={offers} changeCurrentOffer={changeCurrentOffer} />
+              <CitiesCardList
+                offers={offers}
+                onOffersItemHover={handleOffersItemHover}
+                changeCurrentOffer={changeCurrentOffer}
+              />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map city={Amsterdam} offers={offers} selectedOffer={selectedOffer} />
             </div>
           </div>
         </div>
