@@ -32,3 +32,6 @@ export const Amsterdam = {
     zoom: 13
   }
 };
+
+export const INITIAL_ZOOM = 10;
+
