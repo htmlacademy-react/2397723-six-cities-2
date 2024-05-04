@@ -1,13 +1,13 @@
 import { TileLayer } from 'leaflet';
 import { CityName } from '../const/const';
-import { Offer } from '../types/offer';
+import { OfferData } from '../types/offer';
 
 export function ratingToPercent(rating: number): string {
   return `${rating / 5 * 100}%`;
 }
 
-export function getCityOffers(cityName: CityName, favoriteOffers: Offer[]): Offer[] | undefined {
-  return favoriteOffers.filter((offer: Offer): boolean => offer.city.name === cityName);
+export function getCityOffers(cityName: CityName, favoriteOffers: OfferData[]): OfferData[] | undefined {
+  return favoriteOffers.filter((offer: OfferData): boolean => offer.city.name === cityName);
 }
 
 export const layer = new TileLayer(

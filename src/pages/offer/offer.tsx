@@ -1,4 +1,4 @@
-import { Offer } from '../../types/offer';
+import { OfferData } from '../../types/offer';
 import NotFound from '../not-found/not-found';
 import PremiumLabel from '../../components/premium-label/premium-label';
 import CommentForm from '../../components/comment-form/comment-form';
@@ -8,12 +8,12 @@ import { useEffect } from 'react';
 import { ratingToPercent } from '../../utils/common';
 
 type Props = {
-  offer: Offer | undefined;
-  nearOffers: Offer[];
+  offer: OfferData | undefined;
+  nearOffers: OfferData[];
   changeCurrentOffer: (id: string | undefined) => void;
 }
 
-export default function Room({ offer, nearOffers, changeCurrentOffer }: Props): React.JSX.Element {
+export default function Offer({ offer, nearOffers, changeCurrentOffer }: Props): React.JSX.Element {
   const currentOfferId = useParams();
 
   useEffect(() => {

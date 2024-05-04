@@ -1,11 +1,11 @@
-import { Offer } from '../../types/offer';
+import { OfferData } from '../../types/offer';
 import { Link, generatePath } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
 import { ratingToPercent } from '../../utils/common';
 import PremiumLabel from '../premium-label/premium-label';
 
 type Props = {
-  offer: Offer;
+  offer: OfferData;
   onOffersItemHover(id: string): void;
   changeCurrentOffer(id: string): void;
 }

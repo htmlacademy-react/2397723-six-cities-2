@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import CitiesCardList from '../../components/card-list/card-list';
-import { Offer } from '../../types/offer';
+import { OfferData } from '../../types/offer';
 import Map from '../../components/map/map';
 import { Amsterdam } from '../../const/const';
 
 type Props = {
   placesCount: number;
-  offers: Offer[];
+  offers: OfferData[];
   changeCurrentOffer: (id: string) => void;
 }
 
 export default function Main({ placesCount, offers, changeCurrentOffer }: Props): React.JSX.Element {
-  const [selectedOffer, setSelectedPoint] = useState<Offer | undefined>(
+  const [selectedOffer, setSelectedPoint] = useState<OfferData | undefined>(
     undefined
   );
 

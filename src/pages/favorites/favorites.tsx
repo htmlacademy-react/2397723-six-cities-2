@@ -1,10 +1,10 @@
 import React from 'react';
 import FavoritesList from '../../components/favorites-list/favorites-list';
-import { Offer } from '../../types/offer';
+import { OfferData } from '../../types/offer';
 
 
 type Props = {
-  offers: Offer[];
+  offers: OfferData[];
   changeCurrentOffer: (id: string) => void;
 }
 

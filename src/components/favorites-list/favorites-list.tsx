@@ -1,11 +1,11 @@
 import React from 'react';
-import { Offer } from '../../types/offer';
+import { OfferData } from '../../types/offer';
 import { CityName } from '../../const/const';
 import FavoritesPlaces from '../favorites-location-item/favorites-location-item';
 import { getCityOffers } from '../../utils/common';
 
 type Props = {
-  favoriteOffers: Offer[];
+  favoriteOffers: OfferData[];
   changeCurrentOffer: (id: string) => void;
 }
 

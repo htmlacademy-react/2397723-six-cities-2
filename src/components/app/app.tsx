@@ -1,11 +1,11 @@
 import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from '../../pages/app-routes';
-import { Offer } from '../../types/offer';
+import { OfferData } from '../../types/offer';
 import React from 'react';
 
 type Props = {
   placesCount: number;
-  offers: Offer[];
+  offers: OfferData[];
 }
 
 function App({ placesCount, offers }: Props): React.JSX.Element {
