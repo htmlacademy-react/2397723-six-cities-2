@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CitiesCardList from '../../components/card-list/card-list';
 import { OfferData } from '../../types/offer';
 import Map from '../../components/map/map';
-import { Amsterdam } from '../../const/const';
+import { Amsterdam, Page } from '../../const/const';
 
 type Props = {
   placesCount: number;
@@ -87,7 +87,7 @@ export default function Main({ placesCount, offers, changeCurrentOffer }: Props)
               />
             </section>
             <div className="cities__right-section">
-              <Map city={Amsterdam} offers={offers} selectedOffer={selectedOffer} />
+              <Map city={Amsterdam} offers={offers} selectedOffer={selectedOffer} renderingPage={Page.Cities} />
             </div>
           </div>
         </div>

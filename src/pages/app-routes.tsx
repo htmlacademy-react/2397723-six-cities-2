@@ -9,13 +9,15 @@ import Main from './main/main';
 import { OfferData } from '../types/offer';
 import HeaderLayout from '../components/header/header-layout';
 import React, { useState } from 'react';
+import { Review } from '../types/reviews';
 
 type Props = {
   placesCount: number;
   offers: OfferData[];
+  reviews: Review[];
 }
 
-export default function AppRoutes({ placesCount, offers }: Props): React.JSX.Element {
+export default function AppRoutes({ placesCount, offers, reviews }: Props): React.JSX.Element {
   // TODO Попробовать react-helmet-async, ретроспектива 3.8 - 1:10:00
 
   //TODO эта часть кода временная, для того, чтобы передавать в компонент Room только одно конкретное предложение и конкретный список похожих предложений
@@ -51,7 +53,7 @@ export default function AppRoutes({ placesCount, offers }: Props): React.JSX.Ele
         />
         <Route
           path={AppRoute.Offer}
-          element={<Offer offer={currentOffer} nearOffers={nearOffers} changeCurrentOffer={setOffer}/>}
+          element={<Offer offer={currentOffer} nearOffers={nearOffers} changeCurrentOffer={setOffer} reviews={reviews}/>}
         />
         <Route
           path='*'
