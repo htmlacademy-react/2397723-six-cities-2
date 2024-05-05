@@ -2,18 +2,23 @@ import { OfferData } from '../../types/offer';
 import NotFound from '../not-found/not-found';
 import PremiumLabel from '../../components/premium-label/premium-label';
 import CommentForm from '../../components/comment-form/comment-form';
-import NearPlacesCard from '../../components/near-places-card/near-places-card';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { ratingToPercent } from '../../utils/common';
+import ReviewsList from '../../components/reviews-list/reviews-list';
+import { Review } from '../../types/reviews';
+import Map from '../../components/map/map';
+import { Page } from '../../const/const';
+import NearPlacesList from '../../components/near-places-list/near-places-list';
 
 type Props = {
   offer: OfferData | undefined;
   nearOffers: OfferData[];
+  reviews: Review[] | undefined;
   changeCurrentOffer: (id: string | undefined) => void;
 }
 
-export default function Offer({ offer, nearOffers, changeCurrentOffer }: Props): React.JSX.Element {
+export default function Offer({ offer, nearOffers, reviews, changeCurrentOffer }: Props): React.JSX.Element {
   const currentOfferId = useParams();
 
   useEffect(() => {
@@ -143,53 +148,19 @@ export default function Offer({ offer, nearOffers, changeCurrentOffer }: Props):
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
-                      </div>
-                      <span className="reviews__user-name">
-                        Max
-                      </span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{ width: '80%' }}></span>
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                    </div>
-                  </li>
-                </ul>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews?.length}</span></h2>
+                {reviews && <ReviewsList reviews={reviews} />}
                 <CommentForm />
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <Map city={offer.city} offers={nearOffers} selectedOffer={undefined} renderingPage={Page.Offer} />
         </section>
         <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              {
-                nearOffers.map((nearOffer) => (
-                  <NearPlacesCard
-                    key={nearOffer.id}
-                    offer={nearOffer}
-                    changeCurrentOffer={changeCurrentOffer}
-                  />
-                )
-                )
-              }
-            </div>
-          </section>
+          <NearPlacesList
+            nearOffers={nearOffers}
+            changeCurrentOffer={changeCurrentOffer}
+          />
         </div>
       </main>
     </div>

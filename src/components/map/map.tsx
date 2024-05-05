@@ -1,14 +1,15 @@
-import React, {useRef, useEffect} from 'react';
-import {Icon, Marker, layerGroup} from 'leaflet';
+import React, { useRef, useEffect } from 'react';
+import { Icon, Marker, layerGroup } from 'leaflet';
 import useMap from '../../hooks/use-map';
 import { City, OfferData } from '../../types/offer';
-import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const/const';
+import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const/const';
 import 'leaflet/dist/leaflet.css';
 
 type Props = {
   city: City;
   offers: OfferData[];
   selectedOffer: OfferData | undefined;
+  renderingPage: string;
 };
 
 const defaultCustomIcon = new Icon({
@@ -23,7 +24,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map({city, offers, selectedOffer}: Props): React.JSX.Element {
+function Map({ city, offers, selectedOffer, renderingPage }: Props): React.JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -49,9 +50,9 @@ function Map({city, offers, selectedOffer}: Props): React.JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedOffer]);
+  }, [map, offers, selectedOffer, city]);
 
-  return <section className="cities__map map" ref={mapRef}></section>;
+  return <section className={`${renderingPage}__map map`} ref={mapRef}></section>;
 }
 
 export default Map;
