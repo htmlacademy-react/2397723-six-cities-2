@@ -17,3 +17,10 @@ export const layer = new TileLayer(
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
   }
 );
+
+export function humanizeDate(date: string): string {
+  const data = new Date(date);
+  const year = data.getFullYear();
+  const month = data.toLocaleString('en', {month: 'long'});
+  return `${month} ${year}`;
+}

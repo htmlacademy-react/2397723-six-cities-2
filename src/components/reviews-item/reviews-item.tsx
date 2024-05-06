@@ -1,6 +1,6 @@
 import React from 'react';
 import { Review } from '../../types/reviews';
-import { ratingToPercent } from '../../utils/common';
+import { humanizeDate, ratingToPercent } from '../../utils/common';
 
 type Props = {
   review: Review;
@@ -30,7 +30,7 @@ export default function ReviewsItem({ review }: Props): React.JSX.Element {
         <p className="reviews__text">
           {review.comment}
         </p>
-        <time className="reviews__time" dateTime={review.date}>April 2019</time>
+        <time className="reviews__time" dateTime={review.date}>{humanizeDate(review.date)}</time>
       </div>
     </li>
   );
