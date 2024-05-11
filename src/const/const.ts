@@ -20,6 +20,18 @@ export enum CityName {
   Dusseldorf = 'Dusseldorf'
 }
 
+export enum Page {
+  Cities = 'cities',
+  Offer = 'offer'
+}
+
+export const SortOption: [string, string, string, string] = [
+  'Popular',
+  'Price: low to high',
+  'Price: high to low',
+  'Top rated first'
+];
+
 export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
 
 export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
@@ -32,3 +44,6 @@ export const Amsterdam = {
     zoom: 13
   }
 };
+
+export const INITIAL_ZOOM = 10;
+

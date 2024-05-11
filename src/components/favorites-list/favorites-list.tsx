@@ -1,15 +1,12 @@
 import React from 'react';
-import { Offer } from '../../types/offer';
+import { OfferData } from '../../types/offer';
 import { CityName } from '../../const/const';
-import FavoritesCard from '../favorites-card/favorites-card';
+import FavoritesPlaces from '../favorites-location-item/favorites-location-item';
+import { getCityOffers } from '../../utils/common';
 
 type Props = {
-  favoriteOffers: Offer[];
+  favoriteOffers: OfferData[];
   changeCurrentOffer: (id: string) => void;
-}
-
-function getCityOffers(cityName: CityName, favoriteOffers: Offer[]): Offer[] | undefined {
-  return favoriteOffers.filter((offer: Offer): boolean => offer.city.name === cityName);
 }
 
 export default function FavoritesList({ favoriteOffers, changeCurrentOffer }: Props): React.JSX.Element {
@@ -28,16 +25,11 @@ export default function FavoritesList({ favoriteOffers, changeCurrentOffer }: Pr
                   </a>
                 </div>
               </div>
-              <div className="favorites__places">
-                {cityOffers?.map((offer: Offer): React.JSX.Element => (
-                  <FavoritesCard
-                    key={offer.id}
-                    offer={offer}
-                    changeCurrentOffer={changeCurrentOffer}
-                  />))}
-              </div>
-            </li>
-          );
+              <FavoritesPlaces
+                offers={cityOffers}
+                changeCurrentOffer={changeCurrentOffer}
+              />
+            </li>);
         }
       })}
     </ul>

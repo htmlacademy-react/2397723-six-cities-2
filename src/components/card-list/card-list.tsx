@@ -1,8 +1,8 @@
 import CitiesCard from '../cities-card/cities-card';
-import { Offer } from '../../types/offer';
+import { OfferData } from '../../types/offer';
 
 type Props = {
-  offers: Offer[];
+  offers: OfferData[];
   onOffersItemHover: (listItemName: string) => void;
   changeCurrentOffer: (id: string) => void;
 }

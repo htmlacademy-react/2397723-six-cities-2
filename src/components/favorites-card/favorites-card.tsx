@@ -1,22 +1,27 @@
-import { Offer } from '../../types/offer';
+import { OfferData } from '../../types/offer';
 import { Link, generatePath } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
 import PremiumLabel from '../premium-label/premium-label';
 import { ratingToPercent } from '../../utils/common';
 
 type Props = {
-  offer: Offer;
+  offer: OfferData;
   changeCurrentOffer(id: string): void;
 }
 
 export default function FavoritesCard({ offer, changeCurrentOffer }: Props): React.JSX.Element {
+
+  const handleCurrentOfferChange = (): void => {
+    changeCurrentOffer(offer.id);
+  };
+
   return (
     <article
       className="favorites__card place-card"
     >
       {offer.isPremium && <PremiumLabel />}
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={() => changeCurrentOffer(offer.id)}>
+        <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={handleCurrentOfferChange}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -46,7 +51,7 @@ export default function FavoritesCard({ offer, changeCurrentOffer }: Props): Rea
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={() => changeCurrentOffer(offer.id)}>{offer.title}</Link>
+          <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={handleCurrentOfferChange}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
