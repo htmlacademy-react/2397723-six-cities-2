@@ -15,7 +15,7 @@ export enum AuthorizationStatus {
 
 export enum NameSpaces {
   Offers = 'OFFERS',
-  nearPlaces = 'NEAR_PLACES',
+  NearPlaces = 'NEAR_PLACES',
   Favorites = 'FAVORITES',
   Reviews = 'REVIEWS',
   Offer = 'OFFER',

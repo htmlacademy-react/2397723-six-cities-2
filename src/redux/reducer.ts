@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { fetchOffer, fetchOffers } from './action';
+import { changeActiveCity, fetchOffer, fetchOffers } from './action';
 import { offers } from '../mocks/offers';
 import { City, OfferData } from '../types/offer';
 import { Review } from '../types/reviews';
@@ -28,5 +28,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchOffer, (state, action) => {
       state.offer = offers.find((offer) => offer.id === action.payload);
+    })
+    .addCase(changeActiveCity, (state, action) => {
+      state.activeCity = Cities.find((city) => city.name === action.payload);
     });
 });

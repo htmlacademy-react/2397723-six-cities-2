@@ -17,7 +17,7 @@ export default function CitiesCardList({ offers, onOffersItemHover, changeCurren
           onOffersItemHover={onOffersItemHover}
           changeCurrentOffer={changeCurrentOffer}
         />
-      ))};
+      ))}
     </div>
   );
 }

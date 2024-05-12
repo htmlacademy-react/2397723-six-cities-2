@@ -1,16 +1,29 @@
 import React from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
+import { changeActiveCity } from '../../redux/action';
+import { Link } from 'react-router-dom';
 
 type Props = {
   cityName: string;
-  activeCityName: string | undefined;
 }
 
-export default function CitiesTabsItem({ cityName, activeCityName }: Props): React.JSX.Element {
+export default function CitiesTabsItem({ cityName }: Props): React.JSX.Element {
+  const activeCity = useAppSelector((state) => state.activeCity);
+  const dispatch = useAppDispatch();
+
+  const changeActiveCityHandler = () => {
+    dispatch(changeActiveCity(cityName));
+  };
+
   return (
     <li className="locations__item">
-      <a className={`locations__item-link tabs__item ${cityName === activeCityName ? 'tabs__item--active' : ''}`} href="#">
+      <Link
+        className={`locations__item-link tabs__item ${cityName === activeCity?.name ? 'tabs__item--active' : ''}`}
+        to='..'
+        onClick={changeActiveCityHandler}
+      >
         <span>{cityName}</span>
-      </a>
+      </Link>
     </li>
   );
 }
