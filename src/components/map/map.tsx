@@ -6,7 +6,7 @@ import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const/const';
 import 'leaflet/dist/leaflet.css';
 
 type Props = {
-  city: City;
+  city: City | undefined;
   offers: OfferData[];
   selectedOffer: OfferData | undefined;
   renderingPage: string;

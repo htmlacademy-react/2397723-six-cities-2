@@ -12,12 +12,11 @@ import React, { useState } from 'react';
 import { Review } from '../types/reviews';
 
 type Props = {
-  placesCount: number;
   offers: OfferData[];
   reviews: Review[];
 }
 
-export default function AppRoutes({ placesCount, offers, reviews }: Props): React.JSX.Element {
+export default function AppRoutes({ offers, reviews }: Props): React.JSX.Element {
   // TODO Попробовать react-helmet-async, ретроспектива 3.8 - 1:10:00
 
   //TODO эта часть кода временная, для того, чтобы передавать в компонент Room только одно конкретное предложение и конкретный список похожих предложений
@@ -35,7 +34,7 @@ export default function AppRoutes({ placesCount, offers, reviews }: Props): Reac
       <Route path={AppRoute.Main} element={<HeaderLayout />}>
         <Route
           index
-          element={<Main placesCount={placesCount} offers={offers} changeCurrentOffer={setOffer}/>}
+          element={<Main changeCurrentOffer={setOffer}/>}
         />
         <Route
           path={AppRoute.Favorites}
