@@ -6,7 +6,7 @@ import { Cities, Page } from '../../const/const';
 import Sort from '../../components/sort/sort';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
 import { fetchOffers } from '../../redux/action';
-import CitiesList from '../../components/cities-list/cities-list';
+import CitiesTabsList from '../../components/cities-tabs-list/cities-tabs-list';
 
 type Props = {
   changeCurrentOffer: (id: string) => void;
@@ -33,7 +33,7 @@ export default function Main({ changeCurrentOffer }: Props): React.JSX.Element {
   return (
     <div className="page page--gray page--main">
       <main className="page__main page__main--index">
-        <CitiesList/>
+        <CitiesTabsList/>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
