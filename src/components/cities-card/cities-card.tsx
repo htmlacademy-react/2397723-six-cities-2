@@ -7,14 +7,9 @@ import PremiumLabel from '../premium-label/premium-label';
 type Props = {
   offer: OfferData;
   onOffersItemHover(id: string): void;
-  changeCurrentOffer(id: string): void;
 }
 
-export default function CitiesCard({ offer, onOffersItemHover, changeCurrentOffer }: Props): React.JSX.Element {
-
-  const handleCurrentOfferChange = (): void => {
-    changeCurrentOffer(offer.id);
-  };
+export default function CitiesCard({ offer, onOffersItemHover }: Props): React.JSX.Element {
 
   return (
     <article
@@ -23,7 +18,7 @@ export default function CitiesCard({ offer, onOffersItemHover, changeCurrentOffe
     >
       {offer.isPremium && <PremiumLabel />}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={handleCurrentOfferChange}>
+        <Link to={generatePath(AppRoute.Offer, { id: offer.id })}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -53,7 +48,7 @@ export default function CitiesCard({ offer, onOffersItemHover, changeCurrentOffe
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={handleCurrentOfferChange}>{offer.title}</Link>
+          <Link to={generatePath(AppRoute.Offer, { id: offer.id })}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

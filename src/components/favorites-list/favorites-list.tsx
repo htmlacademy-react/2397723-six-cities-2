@@ -6,10 +6,9 @@ import { getCityOffers } from '../../utils/common';
 
 type Props = {
   favoriteOffers: OfferData[];
-  changeCurrentOffer: (id: string) => void;
 }
 
-export default function FavoritesList({ favoriteOffers, changeCurrentOffer }: Props): React.JSX.Element {
+export default function FavoritesList({ favoriteOffers }: Props): React.JSX.Element {
   const cities = Object.values(CityName);
   return (
     <ul className="favorites__list">
@@ -27,7 +26,6 @@ export default function FavoritesList({ favoriteOffers, changeCurrentOffer }: Pr
               </div>
               <FavoritesPlaces
                 offers={cityOffers}
-                changeCurrentOffer={changeCurrentOffer}
               />
             </li>);
         }

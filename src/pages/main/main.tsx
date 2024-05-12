@@ -2,17 +2,13 @@ import React, { useEffect, useState } from 'react';
 import CitiesCardList from '../../components/card-list/card-list';
 import { OfferData } from '../../types/offer';
 import Map from '../../components/map/map';
-import { Cities, Page } from '../../const/const';
+import { Page } from '../../const/const';
 import Sort from '../../components/sort/sort';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
 import { fetchOffers } from '../../redux/action';
 import CitiesTabsList from '../../components/cities-tabs-list/cities-tabs-list';
 
-type Props = {
-  changeCurrentOffer: (id: string) => void;
-}
-
-export default function Main({ changeCurrentOffer }: Props): React.JSX.Element {
+export default function Main(): React.JSX.Element {
   const [selectedOffer, setSelectedPoint] = useState<OfferData | undefined>(
     undefined
   );
@@ -44,11 +40,14 @@ export default function Main({ changeCurrentOffer }: Props): React.JSX.Element {
               <CitiesCardList
                 offers={offersByCity}
                 onOffersItemHover={handleOffersItemHover}
-                changeCurrentOffer={changeCurrentOffer}
               />
             </section>
             <div className="cities__right-section">
-              <Map city={Cities.find((city) => city.name === 'Amsterdam')} offers={offersByCity} selectedOffer={selectedOffer} renderingPage={Page.Cities} />
+              <Map
+                offers={offersByCity}
+                selectedOffer={selectedOffer}
+                renderingPage={Page.Cities}
+              />
             </div>
           </div>
         </div>
