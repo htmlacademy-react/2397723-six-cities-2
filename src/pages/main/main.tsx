@@ -7,6 +7,7 @@ import Sort from '../../components/sort/sort';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
 import { fetchOffers } from '../../redux/action';
 import CitiesTabsList from '../../components/cities-tabs-list/cities-tabs-list';
+import { sorting } from '../../utils/sort';
 
 export default function Main(): React.JSX.Element {
   const [selectedOffer, setSelectedPoint] = useState<OfferData | undefined>(
@@ -16,7 +17,9 @@ export default function Main(): React.JSX.Element {
   const dispatch = useAppDispatch();
   const activeCity = useAppSelector((state) => state.activeCity);
   const offers = useAppSelector((state) => state.offers);
+  const activeSort = useAppSelector((state) => state.activeSort);
   const offersByCity = activeCity ? offers.filter((offer) => offer.city.name === activeCity.name) : [];
+  const sortedOffers = sorting[activeSort](offersByCity);
 
   useEffect(() => {
     dispatch(fetchOffers());
@@ -38,7 +41,7 @@ export default function Main(): React.JSX.Element {
               <b className="places__found">{offersByCity.length} places to stay in {activeCity?.name}</b>
               <Sort />
               <CitiesCardList
-                offers={offersByCity}
+                offers={sortedOffers}
                 onOffersItemHover={handleOffersItemHover}
               />
             </section>

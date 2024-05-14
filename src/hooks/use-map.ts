@@ -1,8 +1,7 @@
-import {useEffect, useState, MutableRefObject, useRef} from 'react';
-import {Map} from 'leaflet';
+import { useEffect, useState, MutableRefObject, useRef } from 'react';
+import { Map } from 'leaflet';
 import { City } from '../types/offer';
 import { createLayer } from '../utils/common';
-import { INITIAL_ZOOM } from '../const/const';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
@@ -18,11 +17,9 @@ function useMap(
           lat: city.location.latitude,
           lng: city.location.longitude
         },
-        zoom: INITIAL_ZOOM
+        zoom: city.location.zoom
       });
-
       instance.addLayer(createLayer());
-
       setMap(instance);
       isRenderedRef.current = true;
     }

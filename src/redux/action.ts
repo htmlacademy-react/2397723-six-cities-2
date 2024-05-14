@@ -10,3 +10,4 @@ export const fetchNearPlaces = createAction<OfferData['id']>(`${NameSpaces.NearP
 export const fetchReviews = createAction<OfferData['id']>(`${NameSpaces.Reviews}/fetch`);
 
 export const changeActiveCity = createAction<City['name']>(`${NameSpaces.Offers}/changeActiveCity`);
+export const changeSortOption = createAction<string>(`${NameSpaces.Offers}/changeSortOption`);
