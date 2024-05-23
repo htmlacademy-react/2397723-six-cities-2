@@ -6,14 +6,9 @@ import { ratingToPercent } from '../../utils/common';
 
 type Props = {
   offer: OfferData;
-  changeCurrentOffer(id: string): void;
 }
 
-export default function FavoritesCard({ offer, changeCurrentOffer }: Props): React.JSX.Element {
-
-  const handleCurrentOfferChange = (): void => {
-    changeCurrentOffer(offer.id);
-  };
+export default function FavoritesCard({ offer }: Props): React.JSX.Element {
 
   return (
     <article
@@ -21,7 +16,7 @@ export default function FavoritesCard({ offer, changeCurrentOffer }: Props): Rea
     >
       {offer.isPremium && <PremiumLabel />}
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={handleCurrentOfferChange}>
+        <Link to={generatePath(AppRoute.Offer, { id: offer.id })}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -51,7 +46,7 @@ export default function FavoritesCard({ offer, changeCurrentOffer }: Props): Rea
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={generatePath(AppRoute.Offer, { id: offer.id })} onClick={handleCurrentOfferChange}>{offer.title}</Link>
+          <Link to={generatePath(AppRoute.Offer, { id: offer.id })}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
