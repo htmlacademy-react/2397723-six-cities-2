@@ -30,6 +30,12 @@ function Map({ offers, selectedOffer, renderingPage }: Props): React.JSX.Element
   const map = useMap(mapRef, city);
 
   useEffect(() => {
+    if (map && city) {
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+    }
+  });
+
+  useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((offer) => {
