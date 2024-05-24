@@ -5,7 +5,7 @@ import Map from '../../components/map/map';
 import { Page } from '../../const/const';
 import Sort from '../../components/sort/sort';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
-import { fetchOffers } from '../../redux/action';
+import { fetchOffers } from '../../store/action';
 import CitiesTabsList from '../../components/cities-tabs-list/cities-tabs-list';
 import { sorting } from '../../utils/sort';
 

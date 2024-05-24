@@ -6,7 +6,7 @@ import Map from '../../components/map/map';
 import { Page } from '../../const/const';
 import NearPlacesList from '../../components/near-places-list/near-places-list';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
-import { fetchNearPlaces, fetchOffer, fetchReviews } from '../../redux/action';
+import { fetchNearPlaces, fetchOffer, fetchReviews } from '../../store/action';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
