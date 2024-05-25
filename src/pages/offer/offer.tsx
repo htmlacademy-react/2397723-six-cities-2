@@ -21,9 +21,10 @@ export default function Offer(): React.JSX.Element | undefined {
 
   useEffect(() => {
     dispatch(fetchOffer(currentOfferId.id));
-    //TODO надо ли как у fetchOffer прописать undefind в типы или я что-то делаю не так, и поэтому TS ругается?
-    dispatch(fetchNearPlaces(currentOfferId.id));
-    dispatch(fetchReviews(currentOfferId.id));
+    if (currentOfferId.id) {
+      dispatch(fetchNearPlaces(currentOfferId.id));
+      dispatch(fetchReviews(currentOfferId.id));
+    }
   }, [dispatch, currentOfferId.id]);
 
   if (offer) {
