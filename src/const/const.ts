@@ -22,6 +22,10 @@ export enum NameSpaces {
   User = 'USER'
 }
 
+export enum APIRoute {
+  Offers = '/offers'
+}
+
 export enum CityName {
   Paris = 'Paris',
   Cologne = 'Cologne',
