@@ -3,6 +3,7 @@ import { NameSpaces } from '../const/const';
 import { City, OfferData } from '../types/offer';
 
 export const loadOffers = createAction<OfferData[]>(`${NameSpaces.Offers}/load`);
+export const setLoading = createAction<boolean>(`${NameSpaces.Offers}/setLoading`);
 export const fetchFavorites = createAction(`${NameSpaces.Favorites}/fetch`);
 export const fetchOffer = createAction<OfferData['id'] | undefined>(`${NameSpaces.Offer}/fetch`);
 export const fetchNearPlaces = createAction<OfferData['id']>(`${NameSpaces.NearPlaces}/fetch`);

@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeActiveCity, changeSortOption, fetchFavorites, fetchNearPlaces, fetchOffer, loadOffers, fetchReviews } from './action';
+import { changeActiveCity, changeSortOption, fetchFavorites, fetchNearPlaces, fetchOffer, loadOffers, fetchReviews, setLoading } from './action';
 import { offers } from '../mocks/offers';
 import { City, OfferData } from '../types/offer';
 import { Review } from '../types/reviews';
@@ -14,6 +14,7 @@ const initialState: {
   offer: OfferData | null | undefined;
   activeCity: City | undefined;
   activeSort: string;
+  isLoading: boolean;
 } = {
   offers,
   nearPlaces: [],
@@ -21,13 +22,17 @@ const initialState: {
   reviews: [],
   offer: null,
   activeCity: Cities.find((city) => city.name === CityName.Paris),
-  activeSort: SortOption[0]
+  activeSort: SortOption[0],
+  isLoading: false
 };
 
 export const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
+    })
+    .addCase(setLoading, (state, action) => {
+      state.isLoading = action.payload;
     })
     .addCase(fetchOffer, (state, action) => {
       state.offer = offers.find((offer) => offer.id === action.payload);
