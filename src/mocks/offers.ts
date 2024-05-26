@@ -438,4 +438,4 @@ export const offers: OfferData[] = [
     isPremium: false,
     rating: 2.5
   },
-];
+] as const;

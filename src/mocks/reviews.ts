@@ -45,4 +45,4 @@ export const reviews: Review[] = [
     comment: 'Zzz...',
     rating: 2
   },
-];
+] as const;

@@ -6,7 +6,7 @@ import Map from '../../components/map/map';
 import { Page } from '../../const/const';
 import NearPlacesList from '../../components/near-places-list/near-places-list';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
-import { fetchNearPlaces, fetchOffer, fetchReviews } from '../../redux/action';
+import { fetchNearPlaces, fetchOffer, fetchReviews } from '../../store/action';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
@@ -21,9 +21,10 @@ export default function Offer(): React.JSX.Element | undefined {
 
   useEffect(() => {
     dispatch(fetchOffer(currentOfferId.id));
-    //TODO надо ли как у fetchOffer прописать undefind в типы или я что-то делаю не так, и поэтому TS ругается?
-    dispatch(fetchNearPlaces(currentOfferId.id));
-    dispatch(fetchReviews(currentOfferId.id));
+    if (currentOfferId.id) {
+      dispatch(fetchNearPlaces(currentOfferId.id));
+      dispatch(fetchReviews(currentOfferId.id));
+    }
   }, [dispatch, currentOfferId.id]);
 
   if (offer) {

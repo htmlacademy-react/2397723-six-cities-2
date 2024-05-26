@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
 import { useParams } from 'react-router-dom';
-import { fetchFavorites } from '../../redux/action';
+import { fetchFavorites } from '../../store/action';
 
 export default function Favorites(): React.JSX.Element {
   const dispatch = useAppDispatch();

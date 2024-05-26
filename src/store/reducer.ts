@@ -32,10 +32,10 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(fetchOffer, (state, action) => {
       state.offer = offers.find((offer) => offer.id === action.payload);
     })
-    .addCase(fetchNearPlaces, (state, action) => {
+    .addCase(fetchNearPlaces, (state) => {
       state.nearPlaces = offers;
     })
-    .addCase(fetchReviews, (state, action) => {
+    .addCase(fetchReviews, (state) => {
       state.reviews = reviews;
     })
     .addCase(fetchFavorites, (state) => {
