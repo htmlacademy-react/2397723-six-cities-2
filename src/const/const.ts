@@ -23,7 +23,12 @@ export enum NameSpaces {
 }
 
 export enum APIRoute {
-  Offers = '/offers'
+  Offers = '/offers',
+  NearPlaces = '/nearby',
+  Favorite = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+  Logout = '/logout'
 }
 
 export enum CityName {
