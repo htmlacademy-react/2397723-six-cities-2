@@ -2,11 +2,11 @@ import { Link, Outlet, useLocation } from 'react-router-dom';
 import HeaderNav from '../header-nav/header-nav';
 import { AppRoute } from '../../const/const';
 import { useAppSelector } from '../../hooks/redux-ts';
-import Spinner from '../spinner/Spinner';
+import Spinner from '../spinner/spinner';
 
 export default function HeaderLayout(): React.JSX.Element {
   const location = useLocation();
-  const isLoading = useAppSelector((state) => state.isLoading);
+  const isLoading = useAppSelector((state) => state.OFFERS.isOffersLoading);
 
   return (
     < div className="page page--gray page--main" >
