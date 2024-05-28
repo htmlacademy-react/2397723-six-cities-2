@@ -33,7 +33,7 @@ function Map({ offers, selectedOffer, renderingPage }: Props): React.JSX.Element
     if (map && city) {
       map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
     }
-  });
+  }, [map, city]);
 
   useEffect(() => {
     if (map) {

@@ -20,8 +20,8 @@ export default function Offer(): React.JSX.Element | undefined {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(fetchOffer(id));
     if (id) {
+      dispatch(fetchOffer(id));
       dispatch(fetchNearPlaces(id));
       dispatch(fetchReviews(id));
     }
