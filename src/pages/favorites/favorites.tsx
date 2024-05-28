@@ -2,18 +2,16 @@ import React, { useEffect } from 'react';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
 import { useParams } from 'react-router-dom';
-import { fetchFavorites } from '../../store/action';
+import { fetchFavorites } from '../../store/api-actions';
 
 export default function Favorites(): React.JSX.Element {
   const dispatch = useAppDispatch();
   const currentOffer = useParams();
 
   useEffect(() => {
-    //TODO Тоже есть подозрение, что надо по-другому как-то
-    dispatch(fetchFavorites(currentOffer.id));
+    dispatch(fetchFavorites());
   }, [dispatch, currentOffer.id]);
-  const favorites = useAppSelector((state) => state.favorites);
-
+  const favorites = useAppSelector((state) => state.FAVORITES.favorites);
 
   return (
     <div className="page">

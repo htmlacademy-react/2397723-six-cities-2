@@ -18,14 +18,14 @@ export const fetchOffers = createAsyncThunk<OfferData[], undefined, {
   }
 );
 
-export const fetchOffer = createAsyncThunk<OfferData, string, {
+export const fetchOffer = createAsyncThunk<OfferData, string | undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   `${NameSpaces.Offer}/fetch`,
-  async (offerId: string, { extra: api }) => {
-    const { data } = await api.get<OfferData>(`${APIRoute.Offers}/${offerId}`);
+  async (offerId, { extra: api }) => {
+    const { data } = await api.get<OfferData>(`${APIRoute.Offers}/${offerId ? offerId : ''}`);
     return data;
   }
 );
@@ -37,7 +37,7 @@ export const fetchNearPlaces = createAsyncThunk<OfferData[], string, {
 }>(
   `${NameSpaces.NearPlaces}/fetch`,
   async (offerId: string, { extra: api }) => {
-    const { data } = await api.get<OfferData[]>(`${APIRoute.Offers}/${offerId}/${APIRoute.NearPlaces}`);
+    const { data } = await api.get<OfferData[]>(`${APIRoute.Offers}/${offerId}${APIRoute.NearPlaces}`);
     return data;
   }
 );
@@ -66,7 +66,7 @@ export const setFavoriteStatus = createAsyncThunk<OfferData, { offerId: string; 
   }
 );
 
-export const fetchComments = createAsyncThunk<Review[], string, {
+export const fetchReviews = createAsyncThunk<Review[], string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -78,14 +78,14 @@ export const fetchComments = createAsyncThunk<Review[], string, {
   }
 );
 
-export const addComment = createAsyncThunk<Review[], { offerId: string; comment: Review; rating: number }, {
+export const addReview = createAsyncThunk<Review, { offerId: string; comment: string; rating: number }, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  `${NameSpaces.Reviews}/addComment`,
+  `${NameSpaces.Reviews}/addReview`,
   async ({ offerId, comment, rating }, { extra: api }) => {
-    const { data } = await api.post<Review[]>(`${APIRoute.Comments}/${offerId}`, {comment, rating});
+    const { data } = await api.post<Review>(`${APIRoute.Comments}/${offerId}`, { comment, rating });
     return data;
   }
 );
@@ -108,8 +108,8 @@ export const login = createAsyncThunk<User, AuthData, {
   extra: AxiosInstance;
 }>(
   `${NameSpaces.User}/login`,
-  async ({email, password}, { extra: api }) => {
-    const { data } = await api.post<User>(APIRoute.Login, {email, password});
+  async ({ email, password }, { extra: api }) => {
+    const { data } = await api.post<User>(APIRoute.Login, { email, password });
     return data;
   }
 );

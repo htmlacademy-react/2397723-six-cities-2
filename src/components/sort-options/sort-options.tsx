@@ -1,7 +1,7 @@
 import React from 'react';
 import { SortOption } from '../../const/const';
 import { useAppDispatch } from '../../hooks/redux-ts';
-import { changeSortOption } from '../../store/action';
+import { changeSortOption } from '../../store/app-data/app-action';
 
 type Props = {
   activeOption: string;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
-import { changeActiveCity } from '../../store/action';
+import { changeActiveCity } from '../../store/app-data/app-action';
 import { Link } from 'react-router-dom';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 }
 
 export default function CitiesTabsItem({ cityName }: Props): React.JSX.Element {
-  const activeCity = useAppSelector((state) => state.activeCity);
+  const activeCity = useAppSelector((state) => state.APP.activeCity);
   const dispatch = useAppDispatch();
 
   const changeActiveCityHandler = () => {

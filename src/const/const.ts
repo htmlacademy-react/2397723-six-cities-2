@@ -14,6 +14,7 @@ export enum AuthorizationStatus {
 }
 
 export enum NameSpaces {
+  App = 'APP',
   Offers = 'OFFERS',
   NearPlaces = 'NEAR_PLACES',
   Favorites = 'FAVORITES',

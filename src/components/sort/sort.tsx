@@ -7,7 +7,7 @@ export default function Sort(): React.JSX.Element {
 
   const closeSortOptions = () => setShowSort(false);
 
-  const activeSort = useAppSelector((state) => state.activeSort);
+  const activeSort = useAppSelector((state) => state.APP.activeSort);
 
   return (
     <form className="places__sorting" action="#" method="get">

@@ -6,26 +6,26 @@ import Map from '../../components/map/map';
 import { Page } from '../../const/const';
 import NearPlacesList from '../../components/near-places-list/near-places-list';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
-import { fetchNearPlaces, fetchOffer, fetchReviews } from '../../store/action';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { fetchNearPlaces, fetchOffer, fetchReviews } from '../../store/api-actions';
 
 export default function Offer(): React.JSX.Element | undefined {
 
   const dispatch = useAppDispatch();
-  const offer = useAppSelector((state) => state.offer);
-  const nearPlaces = useAppSelector((state) => state.nearPlaces);
-  const reviews = useAppSelector((state) => state.reviews);
+  const offer = useAppSelector((state) => state.OFFER.offer);
+  const nearPlaces = useAppSelector((state) => state.NEAR_PLACES.nearPlaces);
+  const reviews = useAppSelector((state) => state.REVIEWS.reviews);
 
-  const currentOfferId = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
-    dispatch(fetchOffer(currentOfferId.id));
-    if (currentOfferId.id) {
-      dispatch(fetchNearPlaces(currentOfferId.id));
-      dispatch(fetchReviews(currentOfferId.id));
+    dispatch(fetchOffer(id));
+    if (id) {
+      dispatch(fetchNearPlaces(id));
+      dispatch(fetchReviews(id));
     }
-  }, [dispatch, currentOfferId.id]);
+  }, [dispatch, id]);
 
   if (offer) {
     return (
