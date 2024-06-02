@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../const/const';
+import { AppRoute } from '../const/const';
 import PrivateRoute from '../components/private-route/private-route';
 import Favorites from './favorites/favorites';
 import Login from './login/login';
@@ -8,9 +8,12 @@ import NotFound from './not-found/not-found';
 import Main from './main/main';
 import HeaderLayout from '../components/header/header-layout';
 import React from 'react';
+import { useAppSelector } from '../hooks/redux-ts';
 
 export default function AppRoutes(): React.JSX.Element {
   // TODO Попробовать react-helmet-async, ретроспектива 3.8 - 1:10:00
+
+  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
 
   return (
     <Routes>
@@ -23,7 +26,7 @@ export default function AppRoutes(): React.JSX.Element {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={authorizationStatus}
             >
               <Favorites />
             </PrivateRoute>
