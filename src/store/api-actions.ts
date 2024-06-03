@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
 import { APIRoute, AppRoute, NameSpaces } from '../const/const';
-import { OfferData } from '../types/offer';
+import { FullOffer, OfferData } from '../types/offer';
 import { Review } from '../types/reviews';
 import { AuthData, User } from '../types/user';
 import { dropToken, saveToken } from '../services/token';
@@ -20,14 +20,14 @@ export const fetchOffers = createAsyncThunk<OfferData[], undefined, {
   }
 );
 
-export const fetchOffer = createAsyncThunk<OfferData, string | undefined, {
+export const fetchOffer = createAsyncThunk<FullOffer, string | undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   `${NameSpaces.Offer}/fetch`,
   async (offerId, { extra: api }) => {
-    const { data } = await api.get<OfferData>(`${APIRoute.Offers}/${offerId ? offerId : ''}`);
+    const { data } = await api.get<FullOffer>(`${APIRoute.Offers}/${offerId ? offerId : ''}`);
     return data;
   }
 );
@@ -56,7 +56,7 @@ export const fetchFavorites = createAsyncThunk<OfferData[], undefined, {
   }
 );
 
-export const setFavoriteStatus = createAsyncThunk<OfferData, { offerId: string; status: boolean }, {
+export const setFavoriteStatus = createAsyncThunk<FullOffer, { offerId: string; status: boolean }, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -64,7 +64,7 @@ export const setFavoriteStatus = createAsyncThunk<OfferData, { offerId: string; 
   `${NameSpaces.Favorites}/setStatus`,
   async ({ offerId, status }, { extra: api }) => {
     const statusNumber = status ? 0 : 1;
-    const { data } = await api.post<OfferData>(`${APIRoute.Favorite}/${offerId}/${statusNumber}`);
+    const { data } = await api.post<FullOffer>(`${APIRoute.Favorite}/${offerId}/${statusNumber}`);
     return data;
   }
 );

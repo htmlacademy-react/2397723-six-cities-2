@@ -40,7 +40,20 @@ export const favoritesData = createSlice({
           state.favorites = state.favorites.filter((offer) => offer.id !== action.payload.id);
         }
         if (!action.meta.arg.status) {
-          state.favorites.push(action.payload);
+          const newFavorite: OfferData = {
+            id: action.payload.id,
+            title: action.payload.title,
+            type: action.payload.type,
+            previewImage: action.payload.previewImage,
+            price: action.payload.price,
+            city: action.payload.city,
+            location: action.payload.location,
+            isFavorite: action.payload.isFavorite,
+            isPremium: action.payload.isPremium,
+            rating: action.payload.rating
+          };
+
+          state.favorites.push(newFavorite);
         }
         state.isStatusSanding = false;
       })

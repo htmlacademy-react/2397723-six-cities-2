@@ -9,7 +9,7 @@ type Props = {
   status: boolean;
 };
 
-export default function BookmarkButton({ offerId, status }: Props): React.JSX.Element {
+export default function OfferBookmarkButton({ offerId, status }: Props): React.JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
   const navigate = useNavigate();
@@ -25,11 +25,11 @@ export default function BookmarkButton({ offerId, status }: Props): React.JSX.El
 
   return (
     <button
-      className={`${status ? 'place-card__bookmark-button--active' : ''} place-card__bookmark-button button`}
+      className={`${status ? 'offer__bookmark-button--active' : ''} offer__bookmark-button button`}
       type="button"
       onClick={isAuth ? addFavoriteHandler : redirectToLogin}
     >
-      <svg className="place-card__bookmark-icon" width="18" height="19">
+      <svg className="offer__bookmark-icon" width="31" height="33">
         < use xlinkHref="#icon-bookmark" ></use >
       </svg >
       <span className="visually-hidden">To bookmarks</span>

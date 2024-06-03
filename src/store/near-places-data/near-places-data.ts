@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpaces } from '../../const/const';
 import { OfferData } from '../../types/offer';
-import { fetchNearPlaces } from '../api-actions';
+import { fetchNearPlaces, setFavoriteStatus } from '../api-actions';
 
 const initialState: {
   nearPlaces: OfferData[];
@@ -29,6 +29,10 @@ export const nearPlacesData = createSlice({
       .addCase(fetchNearPlaces.rejected, (state) => {
         state.isNearPlacesLoading = false;
         state.hasError = true;
+      })
+      .addCase(setFavoriteStatus.fulfilled, (state, action) => {
+        state.nearPlaces = state.nearPlaces
+          .map((nearPlace) => nearPlace.id === action.payload.id ? { ...nearPlace, isFavorite: action.payload.isFavorite } : nearPlace);
       });
   }
 });

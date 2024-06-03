@@ -32,7 +32,7 @@ export const offersData = createSlice({
       })
       .addCase(setFavoriteStatus.fulfilled, (state, action) => {
         state.offers = state.offers
-          .map((offer) => offer.id === action.payload.id ? action.payload : offer);
+          .map((offer) => offer.id === action.payload.id ? {...offer, isFavorite: action.payload.isFavorite} : offer);
       });
   }
 });
