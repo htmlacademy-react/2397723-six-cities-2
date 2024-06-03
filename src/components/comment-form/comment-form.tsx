@@ -1,17 +1,23 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
+import { useAppDispatch } from '../../hooks/redux-ts';
+import { addReview } from '../../store/api-actions';
 
-type ratingInput = {
+type RatingInput = {
   value: string;
   title: string;
 }
 
-type Props = {
+type RatingInputProps = {
   value: string;
   title: string;
   handleInputChange: (value: string) => void | undefined;
 }
 
-const ratingInputs: ratingInput[] = [
+type CommentFormProps = {
+  offerId: string;
+}
+
+const ratingInputs: RatingInput[] = [
   {
     value: '5',
     title: 'perfect',
@@ -34,11 +40,11 @@ const ratingInputs: ratingInput[] = [
   }
 ];
 
-const INITIAL_RATING = '0';
+const INITIAL_RATING = 0;
 const INITIAL_COMMENT = '';
 const MIN_COMMENT_LENGTH = 50;
 
-function RatingInput({ value, title, handleInputChange }: Props): React.JSX.Element {
+function RatingInput({ value, title, handleInputChange }: RatingInputProps): React.JSX.Element {
   return (
     <>
       <input
@@ -58,20 +64,27 @@ function RatingInput({ value, title, handleInputChange }: Props): React.JSX.Elem
   );
 }
 
-export default function CommentForm(): React.JSX.Element {
-
+export default function CommentForm({ offerId }: CommentFormProps): React.JSX.Element {
+  const dispatch = useAppDispatch();
 
   const [comment, setComment] = useState<string>(INITIAL_COMMENT);
-  const [rating, setRating] = useState<string>(INITIAL_RATING);
+  const [rating, setRating] = useState<number>(INITIAL_RATING);
 
   const inputChangeHandler = (value: string): void => {
-    setRating(value);
+    setRating(Number(value));
+  };
+
+  const submitHandler = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    dispatch(addReview({ offerId, comment, rating }));
+
   };
 
   const examConditions = (): boolean => rating === INITIAL_RATING || comment.length < MIN_COMMENT_LENGTH;
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={submitHandler}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {
