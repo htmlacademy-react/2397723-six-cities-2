@@ -3,7 +3,7 @@ import CommentForm from '../../components/comment-form/comment-form';
 import { ratingToPercent } from '../../utils/common';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
-import { Page } from '../../const/const';
+import { AuthorizationStatus, Page } from '../../const/const';
 import NearPlacesList from '../../components/near-places-list/near-places-list';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
 import { useParams } from 'react-router-dom';
@@ -17,7 +17,7 @@ export default function Offer(): React.JSX.Element | undefined {
   const offer = useAppSelector((state) => state.OFFER.offer);
   const nearPlaces = useAppSelector((state) => state.NEAR_PLACES.nearPlaces);
   const reviews = useAppSelector((state) => state.REVIEWS.reviews);
-
+  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
   const { id } = useParams();
 
   useEffect(() => {
@@ -35,24 +35,12 @@ export default function Offer(): React.JSX.Element | undefined {
           <section className="offer">
             <div className="offer__gallery-container container">
               <div className="offer__gallery">
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/room.jpg" alt="Photo studio" />
-                </div>
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
-                </div>
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/apartment-02.jpg" alt="Photo studio" />
-                </div>
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/apartment-03.jpg" alt="Photo studio" />
-                </div>
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/studio-01.jpg" alt="Photo studio" />
-                </div>
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
-                </div>
+                {offer.images.map((image) => (
+
+                  <div key={image} className="offer__image-wrapper">
+                    <img className="offer__image" src={image} alt="Photo studio" />
+                  </div>
+                ))}
               </div>
             </div>
             <div className="offer__container container">
@@ -116,7 +104,7 @@ export default function Offer(): React.JSX.Element | undefined {
                 <section className="offer__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews?.length}</span></h2>
                   {reviews && <ReviewsList reviews={reviews} />}
-                  <CommentForm offerId={offer.id}/>
+                  {authorizationStatus === AuthorizationStatus.Auth && <CommentForm offerId={offer.id} />}
                 </section>
               </div>
             </div>
