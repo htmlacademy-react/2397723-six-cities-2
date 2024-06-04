@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { fetchFavorites } from '../../store/api-actions';
 import { AppRoute } from '../../const/const';
 import { OfferData } from '../../types/offer';
+import { Helmet } from 'react-helmet-async';
 
 type NotEmptyFavoritesProps = {
   favorites: OfferData[];
@@ -50,6 +51,7 @@ export default function Favorites(): React.JSX.Element {
 
   return (
     <>
+      <Helmet title='Favorites' />
       {favorites.length > 0 ? <NotEmptyFavorites favorites={favorites} /> : <EmptyFavorites />}
       <footer className="footer container">
         <Link className="footer__logo-link" to={AppRoute.Main}>

@@ -7,6 +7,7 @@ import Sort from '../../components/sort/sort';
 import { useAppSelector } from '../../hooks/redux-ts';
 import CitiesTabsList from '../../components/cities-tabs-list/cities-tabs-list';
 import { sorting } from '../../utils/sort';
+import { Helmet } from 'react-helmet-async';
 
 export default function Main(): React.JSX.Element {
   const [selectedOffer, setSelectedPoint] = useState<OfferData | undefined>(
@@ -27,31 +28,34 @@ export default function Main(): React.JSX.Element {
   const isLoading = useAppSelector((state) => state.OFFERS.isOffersLoading);
 
   return (
-    <div className="page page--gray page--main">
-      <main className="page__main page__main--index">
-        <CitiesTabsList />
-        <div className="cities">
-          {!isLoading &&
-            <div className="cities__places-container container">
-              <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{offersByCity.length} places to stay in {activeCity?.name}</b>
-                <Sort />
-                <CitiesCardList
-                  offers={sortedOffers}
-                  onOffersItemHover={handleOffersItemHover}
-                />
-              </section>
-              <div className="cities__right-section">
-                <Map
-                  offers={offersByCity}
-                  selectedOffer={selectedOffer}
-                  renderingPage={Page.Cities}
-                />
-              </div>
-            </div>}
-        </div>
-      </main>
-    </div>
+    <>
+      <Helmet title='6 Cities'/>
+      <div className="page page--gray page--main">
+        <main className="page__main page__main--index">
+          <CitiesTabsList />
+          <div className="cities">
+            {!isLoading &&
+              <div className="cities__places-container container">
+                <section className="cities__places places">
+                  <h2 className="visually-hidden">Places</h2>
+                  <b className="places__found">{offersByCity.length} places to stay in {activeCity?.name}</b>
+                  <Sort />
+                  <CitiesCardList
+                    offers={sortedOffers}
+                    onOffersItemHover={handleOffersItemHover}
+                  />
+                </section>
+                <div className="cities__right-section">
+                  <Map
+                    offers={offersByCity}
+                    selectedOffer={selectedOffer}
+                    renderingPage={Page.Cities}
+                  />
+                </div>
+              </div>}
+          </div>
+        </main>
+      </div>
+    </>
   );
 }
