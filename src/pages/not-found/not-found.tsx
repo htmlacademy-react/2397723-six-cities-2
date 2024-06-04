@@ -1,8 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './not-found.css';
+import { AppRoute } from '../../const/const';
 
 export default function NotFound(): React.JSX.Element {
+  const navigate = useNavigate();
+  navigate(AppRoute.NotFound);
   return (
     <div className="not-found-container">
       <div className="not-found-information">
