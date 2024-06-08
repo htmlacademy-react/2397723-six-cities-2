@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { useAppDispatch } from '../../hooks/redux-ts';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
 import { addReview } from '../../store/api-actions';
 
 type RatingInput = {
@@ -66,6 +66,7 @@ function RatingInput({ value, title, handleInputChange }: RatingInputProps): Rea
 
 export default function CommentForm({ offerId }: CommentFormProps): React.JSX.Element {
   const dispatch = useAppDispatch();
+  const isReviewSanding = useAppSelector((state) => state.REVIEWS.isReviewSanding);
 
   const [comment, setComment] = useState<string>(INITIAL_COMMENT);
   const [rating, setRating] = useState<number>(INITIAL_RATING);
@@ -81,7 +82,7 @@ export default function CommentForm({ offerId }: CommentFormProps): React.JSX.El
 
   };
 
-  const examConditions = (): boolean => rating === INITIAL_RATING || comment.length < MIN_COMMENT_LENGTH;
+  const examConditions = (): boolean => rating === INITIAL_RATING || comment.length < MIN_COMMENT_LENGTH || isReviewSanding;
 
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={submitHandler}>
