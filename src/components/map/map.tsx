@@ -25,7 +25,7 @@ const currentCustomIcon = new Icon({
 });
 
 function Map({ offers, selectedOffer, renderingPage }: Props): React.JSX.Element {
-  const city = useAppSelector((state) => state.activeCity);
+  const city = useAppSelector((state) => state.APP.activeCity);
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -33,7 +33,7 @@ function Map({ offers, selectedOffer, renderingPage }: Props): React.JSX.Element
     if (map && city) {
       map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
     }
-  });
+  }, [map, city]);
 
   useEffect(() => {
     if (map) {

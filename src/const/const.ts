@@ -14,12 +14,22 @@ export enum AuthorizationStatus {
 }
 
 export enum NameSpaces {
+  App = 'APP',
   Offers = 'OFFERS',
   NearPlaces = 'NEAR_PLACES',
   Favorites = 'FAVORITES',
   Reviews = 'REVIEWS',
   Offer = 'OFFER',
   User = 'USER'
+}
+
+export enum APIRoute {
+  Offers = '/offers',
+  NearPlaces = '/nearby',
+  Favorite = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+  Logout = '/logout'
 }
 
 export enum CityName {
