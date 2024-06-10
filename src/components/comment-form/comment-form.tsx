@@ -1,6 +1,7 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
 import { addReview } from '../../store/api-actions';
+import { changeComment, changeRating } from '../../store/reviews-data/reviews-action';
 
 type RatingInput = {
   value: string;
@@ -10,7 +11,7 @@ type RatingInput = {
 type RatingInputProps = {
   value: string;
   title: string;
-  handleInputChange: (value: string) => void | undefined;
+  handleInputChange: (value: number) => void | undefined;
 }
 
 type CommentFormProps = {
@@ -41,7 +42,6 @@ const ratingInputs: RatingInput[] = [
 ];
 
 const INITIAL_RATING = 0;
-const INITIAL_COMMENT = '';
 const MIN_COMMENT_LENGTH = 50;
 
 function RatingInput({ value, title, handleInputChange }: RatingInputProps): React.JSX.Element {
@@ -53,7 +53,7 @@ function RatingInput({ value, title, handleInputChange }: RatingInputProps): Rea
         value={value}
         id={`${value}-stars`}
         type="radio"
-        onChange={() => handleInputChange(value)}
+        onChange={() => handleInputChange(Number(value))}
       />
       <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={title}>
         <svg className="form__star-image" width="37" height="33">
@@ -67,19 +67,19 @@ function RatingInput({ value, title, handleInputChange }: RatingInputProps): Rea
 export default function CommentForm({ offerId }: CommentFormProps): React.JSX.Element {
   const dispatch = useAppDispatch();
   const isReviewSanding = useAppSelector((state) => state.REVIEWS.isReviewSanding);
+  const comment = useAppSelector((state) => state.REVIEWS.newReview.comment);
+  const rating = useAppSelector((state) => state.REVIEWS.newReview.rating);
 
-  const [comment, setComment] = useState<string>(INITIAL_COMMENT);
-  const [rating, setRating] = useState<number>(INITIAL_RATING);
-
-  const inputChangeHandler = (value: string): void => {
-    setRating(Number(value));
+  const ratingChangeHandler = (value: number): void => {
+    dispatch(changeRating(Number(value)));
+  };
+  const commentChangeHandler = (value: string): void => {
+    dispatch(changeComment(value));
   };
 
   const submitHandler = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-
     dispatch(addReview({ offerId, comment, rating }));
-
   };
 
   const examConditions = (): boolean => rating === INITIAL_RATING || comment.length < MIN_COMMENT_LENGTH || isReviewSanding;
@@ -89,7 +89,7 @@ export default function CommentForm({ offerId }: CommentFormProps): React.JSX.El
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {
-          ratingInputs.map((input) => <RatingInput key={input.value} value={input.value} title={input.title} handleInputChange={inputChangeHandler} />)
+          ratingInputs.map((input) => <RatingInput key={input.value} value={input.value} title={input.title} handleInputChange={ratingChangeHandler} />)
         }
       </div>
       <textarea
@@ -97,7 +97,8 @@ export default function CommentForm({ offerId }: CommentFormProps): React.JSX.El
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={(event) => setComment(event.target.value)}
+        onChange={(event) => commentChangeHandler(event.target.value)}
+        value={comment}
       >
       </textarea>
       <div className="reviews__button-wrapper">

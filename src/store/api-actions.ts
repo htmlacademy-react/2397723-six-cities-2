@@ -81,7 +81,7 @@ export const fetchReviews = createAsyncThunk<Review[], string, {
   }
 );
 
-export const addReview = createAsyncThunk<Review, { offerId: string; comment: string; rating: number }, {
+export const addReview = createAsyncThunk<Review, { offerId: string; comment: string; rating: number | null }, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
