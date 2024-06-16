@@ -3,6 +3,7 @@ import { Link, generatePath } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
 import { ratingToPercent } from '../../utils/common';
 import PremiumLabel from '../premium-label/premium-label';
+import PlaceCardBookmarkButton from '../place-cadr-bookmark-button/place-cadr-bookmark-button';
 
 type Props = {
   offer: OfferData;
@@ -34,12 +35,7 @@ export default function CitiesCard({ offer, onOffersItemHover }: Props): React.J
             <b className="place-card__price-value">{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <PlaceCardBookmarkButton offerId={offer.id} status={offer.isFavorite}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

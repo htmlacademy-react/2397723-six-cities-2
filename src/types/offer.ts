@@ -4,6 +4,12 @@ type Location = {
   zoom: number;
 }
 
+type Host = {
+  isPro: boolean;
+  name: string;
+  avatarUrl: string;
+}
+
 export type City = {
   name: string;
   location: Location;
@@ -21,3 +27,32 @@ export type OfferData = {
   isPremium: boolean;
   rating: number;
 }
+
+export type FullOffer = {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  city: City;
+  location: Location;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  description: string;
+  images: string[];
+  previewImage: string;
+  goods: string[];
+  host: Host;
+  bedrooms: number;
+  maxAdults: number;
+}
+//TODO не смог разобраться с объединением типов. В компоненте Offer вылезает ошибка типов
+// type ExtendOffer = {
+//   description: string;
+//   images: string[];
+//   goods: string[];
+//   host: Host;
+//   bedrooms: number;
+//   maxAdults: number;
+// }
+// export type FullOffer = OfferData & ExtendOffer
