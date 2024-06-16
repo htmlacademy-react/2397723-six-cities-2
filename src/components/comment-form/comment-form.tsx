@@ -4,12 +4,13 @@ import { addReview } from '../../store/api-actions';
 import { changeComment, changeRating } from '../../store/reviews-data/reviews-action';
 
 type RatingInput = {
-  value: string;
+  value: number;
   title: string;
 }
 
 type RatingInputProps = {
-  value: string;
+  rating: number | null;
+  value: number;
   title: string;
   handleInputChange: (value: number) => void | undefined;
 }
@@ -20,31 +21,31 @@ type CommentFormProps = {
 
 const ratingInputs: RatingInput[] = [
   {
-    value: '5',
+    value: 5,
     title: 'perfect',
   },
   {
-    value: '4',
+    value: 4,
     title: 'good'
   },
   {
-    value: '3',
+    value: 3,
     title: 'not bad'
   },
   {
-    value: '2',
+    value: 2,
     title: 'badly'
   },
   {
-    value: '1',
+    value: 1,
     title: 'terribly'
   }
 ];
 
-const INITIAL_RATING = 0;
+const INITIAL_RATING = null;
 const MIN_COMMENT_LENGTH = 50;
 
-function RatingInput({ value, title, handleInputChange }: RatingInputProps): React.JSX.Element {
+function RatingInput({ rating, value, title, handleInputChange }: RatingInputProps): React.JSX.Element {
   return (
     <>
       <input
@@ -54,6 +55,7 @@ function RatingInput({ value, title, handleInputChange }: RatingInputProps): Rea
         id={`${value}-stars`}
         type="radio"
         onChange={() => handleInputChange(Number(value))}
+        checked={value === rating}
       />
       <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={title}>
         <svg className="form__star-image" width="37" height="33">
@@ -89,7 +91,7 @@ export default function CommentForm({ offerId }: CommentFormProps): React.JSX.El
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {
-          ratingInputs.map((input) => <RatingInput key={input.value} value={input.value} title={input.title} handleInputChange={ratingChangeHandler} />)
+          ratingInputs.map((input) => <RatingInput key={input.value} rating={rating} value={input.value} title={input.title} handleInputChange={ratingChangeHandler} />)
         }
       </div>
       <textarea
