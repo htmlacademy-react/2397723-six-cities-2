@@ -13,7 +13,7 @@ export default function Login(): React.JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
 
   const cities = Object.values(CityName);
-  const randomCity = cities[Math.floor(Math.random() * cities.length - 1)];
+  const randomCity = cities[Math.floor(Math.random() * cities.length)];
 
   const submitHandler = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
