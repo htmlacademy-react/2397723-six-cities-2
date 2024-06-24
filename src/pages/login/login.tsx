@@ -1,15 +1,19 @@
 import React, { FormEvent, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
 import { login } from '../../store/api-actions';
-import { AppRoute, AuthorizationStatus } from '../../const/const';
-import { Navigate } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus, CityName } from '../../const/const';
+import { Link, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { changeActiveCity } from '../../store/app-data/app-action';
 
 export default function Login(): React.JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
+
+  const cities = Object.values(CityName);
+  const randomCity = cities[Math.floor(Math.random() * cities.length - 1)];
 
   const submitHandler = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -23,6 +27,10 @@ export default function Login(): React.JSX.Element {
   if (authorizationStatus === AuthorizationStatus.Auth) {
     return (<Navigate to={AppRoute.Main} />);
   }
+
+  const changeCityHandler = () => {
+    dispatch(changeActiveCity(randomCity));
+  };
 
   return (
     <>
@@ -46,9 +54,9 @@ export default function Login(): React.JSX.Element {
             </section>
             <section className="locations locations--login locations--current">
               <div className="locations__item">
-                <a className="locations__item-link" href="#">
-                  <span>Amsterdam</span>
-                </a>
+                <Link className="locations__item-link" to={AppRoute.Main} onClick={changeCityHandler}>
+                  <span>{randomCity}</span>
+                </Link>
               </div>
             </section>
           </div>
