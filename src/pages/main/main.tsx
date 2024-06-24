@@ -8,6 +8,7 @@ import { useAppSelector } from '../../hooks/redux-ts';
 import CitiesTabsList from '../../components/cities-tabs-list/cities-tabs-list';
 import { sorting } from '../../utils/sort';
 import { Helmet } from 'react-helmet-async';
+import MainEmpty from '../../components/main-empty/main-empty';
 
 export default function Main(): React.JSX.Element {
   const [selectedOffer, setSelectedPoint] = useState<OfferData | undefined>(
@@ -31,10 +32,11 @@ export default function Main(): React.JSX.Element {
     <>
       <Helmet title='6 Cities'/>
       <div className="page page--gray page--main">
-        <main className="page__main page__main--index">
+        <main className={`page__main page__main--index ${offersByCity.length < 1 ? 'page__main--index-empty' : ''}`}>
           <CitiesTabsList />
           <div className="cities">
-            {!isLoading &&
+            {!isLoading && offersByCity.length < 1 && <MainEmpty activeCity={activeCity?.name}/>}
+            {!isLoading && offersByCity.length > 0 &&
               <div className="cities__places-container container">
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>

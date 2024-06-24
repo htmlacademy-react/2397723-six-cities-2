@@ -114,7 +114,9 @@ export default function Offer(): React.JSX.Element | undefined {
                 </section>
               </div>
             </div>
-            <Map offers={nearPlaces} selectedOffer={undefined} renderingPage={Page.Offer} />
+            <div style={{ padding: '0 58px' }}>
+              <Map offers={nearPlaces} selectedOffer={undefined} renderingPage={Page.Offer} />
+            </div>
           </section>
           <div className="container">
             <NearPlacesList
