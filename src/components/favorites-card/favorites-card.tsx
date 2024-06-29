@@ -3,7 +3,7 @@ import { Link, generatePath } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
 import PremiumLabel from '../premium-label/premium-label';
 import { ratingToPercent } from '../../utils/common';
-import PlaceCardBookmarkButton from '../place-cadr-bookmark-button/place-cadr-bookmark-button';
+import PlaceCardBookmarkButton from '../place-card-bookmark-button/place-card-bookmark-button';
 
 type Props = {
   offer: OfferData;
