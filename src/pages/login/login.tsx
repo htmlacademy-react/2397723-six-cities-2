@@ -4,7 +4,7 @@ import { login } from '../../store/api-actions';
 import { AppRoute, AuthorizationStatus, CityName } from '../../const/const';
 import { Link, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { changeActiveCity } from '../../store/app-data/app-action';
+import { changeActiveCity } from '../../store/app-data/app-data';
 
 export default function Login(): React.JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);

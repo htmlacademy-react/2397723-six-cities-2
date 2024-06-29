@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
-import { changeActiveCity } from '../../store/app-data/app-action';
+import { changeActiveCity } from '../../store/app-data/app-data';
 import { Link } from 'react-router-dom';
 
 type Props = {
