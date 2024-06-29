@@ -1,7 +1,7 @@
 import { FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
 import { addReview } from '../../store/api-actions';
-import { changeComment, changeRating } from '../../store/reviews-data/reviews-action';
+import { changeComment, changeRating } from '../../store/reviews-data/reviews-data';
 import RatingInput from '../rating-input/rating-input';
 
 type RatingInput = {
