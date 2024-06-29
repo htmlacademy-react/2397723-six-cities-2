@@ -27,9 +27,9 @@ export default function HeaderNav(): React.JSX.Element {
               </Link>
             </li>
             <li className="header__nav-item">
-              <a className="header__nav-link" href="#">
+              <Link className="header__nav-link" to={AppRoute.Main}>
                 <span className="header__signout" onClick={logoutHandler}>Sign out</span>
-              </a>
+              </Link>
             </li>
           </> :
           <li className="header__nav-item">
