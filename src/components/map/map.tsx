@@ -8,7 +8,6 @@ import { useAppSelector } from '../../hooks/redux-ts';
 
 type Props = {
   offers: OfferData[];
-  selectedOffer: OfferData | undefined;
   renderingPage: string;
 };
 
@@ -24,8 +23,9 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map({ offers, selectedOffer, renderingPage }: Props): React.JSX.Element {
+function Map({ offers, renderingPage }: Props): React.JSX.Element {
   const city = useAppSelector((state) => state.APP.activeCity);
+  const hoveredOffer = useAppSelector((state) => state.APP.hoveredOffer);
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -46,7 +46,7 @@ function Map({ offers, selectedOffer, renderingPage }: Props): React.JSX.Element
 
         marker
           .setIcon(
-            selectedOffer !== undefined && offer.id === selectedOffer.id
+            hoveredOffer !== undefined && offer.id === hoveredOffer.id
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -57,7 +57,7 @@ function Map({ offers, selectedOffer, renderingPage }: Props): React.JSX.Element
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedOffer, city]);
+  }, [map, offers, hoveredOffer, city]);
 
   return <section className={`${renderingPage}__map map`} ref={mapRef}></section>;
 }
