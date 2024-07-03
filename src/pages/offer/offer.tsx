@@ -11,14 +11,18 @@ import { useEffect } from 'react';
 import { fetchNearPlaces, fetchOffer, fetchReviews } from '../../store/api-actions';
 import OfferBookmarkButton from '../../components/offer-bookmark-button/offer-bookmark-button';
 import { Helmet } from 'react-helmet-async';
+import { getOffer, getOfferError } from '../../store/offer-data/offer-data.selectors';
+import { getNearPlaces } from '../../store/near-places-data/near-places-data.selectors';
+import { getReviews } from '../../store/reviews-data/reviews-data.selectors';
+import { getAuthorizationStatus } from '../../store/user-data/user-data.selectors';
 
 export default function Offer(): React.JSX.Element | undefined {
   const dispatch = useAppDispatch();
-  const offer = useAppSelector((state) => state.OFFER.offer);
-  const offerError = useAppSelector((state) => state.OFFER.hasError);
-  const nearPlaces = useAppSelector((state) => state.NEAR_PLACES.nearPlaces);
-  const reviews = useAppSelector((state) => state.REVIEWS.reviews);
-  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
+  const offer = useAppSelector(getOffer);
+  const offerError = useAppSelector(getOfferError);
+  const nearPlaces = useAppSelector(getNearPlaces);
+  const reviews = useAppSelector(getReviews);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const { id } = useParams();
   const navigate = useNavigate();
 

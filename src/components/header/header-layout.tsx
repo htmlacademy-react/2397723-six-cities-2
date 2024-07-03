@@ -3,25 +3,31 @@ import HeaderNav from '../header-nav/header-nav';
 import { AppRoute } from '../../const/const';
 import { useAppSelector } from '../../hooks/redux-ts';
 import Spinner from '../spinner/spinner';
+import { getFavoritesLoading, getIsStatusSanding } from '../../store/favorites-data/favorites-data.selectors';
+import { getIsNearPlacesLoading } from '../../store/near-places-data/near-places-data.selectors';
+import { getIsOfferLoading } from '../../store/offer-data/offer-data.selectors';
+import { getIsOffersLoading } from '../../store/offers-data/offers-data.selectors';
+import { getIsReviewSanding, getIsReviewsLoading } from '../../store/reviews-data/reviews-data.selectors';
+import { getIsCheckAuthLoading, getIsLoginLoading, getIsLogoutLoading } from '../../store/user-data/user-data.selectors';
 
 export default function HeaderLayout(): React.JSX.Element {
-  const isOffersLoading = useAppSelector((state) => state.OFFERS.isOffersLoading);
-  const isOfferLoading = useAppSelector((state) => state.OFFER.isOfferLoading);
-  const isNearPlacesLoading = useAppSelector((state) => state.NEAR_PLACES.isNearPlacesLoading);
-  const isFavoritesLoading = useAppSelector((state) => state.FAVORITES.isFavoritesLoading);
-  const isStatusLoading = useAppSelector((state) => state.FAVORITES.isStatusSanding);
-  const isReviewsLoading = useAppSelector((state) => state.REVIEWS.isReviewsLoading);
-  const isReviewsSanding = useAppSelector((state) => state.REVIEWS.isReviewSanding);
-  const isCheckAuthLoading = useAppSelector((state) => state.USER.isCheckAuthLoading);
-  const isLoginLoading = useAppSelector((state) => state.USER.isLoginLoading);
-  const isLogoutLoading = useAppSelector((state) => state.USER.isLogoutLoading);
+  const isOffersLoading = useAppSelector(getIsOffersLoading);
+  const isOfferLoading = useAppSelector(getIsOfferLoading);
+  const isNearPlacesLoading = useAppSelector(getIsNearPlacesLoading);
+  const isFavoritesLoading = useAppSelector(getFavoritesLoading);
+  const isStatusSanding = useAppSelector(getIsStatusSanding);
+  const isReviewsLoading = useAppSelector(getIsReviewsLoading);
+  const isReviewsSanding = useAppSelector(getIsReviewSanding);
+  const isCheckAuthLoading = useAppSelector(getIsCheckAuthLoading);
+  const isLoginLoading = useAppSelector(getIsLoginLoading);
+  const isLogoutLoading = useAppSelector(getIsLogoutLoading);
 
   const isLoading =
     isOffersLoading
     || isOfferLoading
     || isNearPlacesLoading
     || isFavoritesLoading
-    || isStatusLoading
+    || isStatusSanding
     || isReviewsLoading
     || isReviewsSanding
     || isCheckAuthLoading

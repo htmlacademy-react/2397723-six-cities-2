@@ -5,6 +5,7 @@ import { OfferData } from '../../types/offer';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const/const';
 import 'leaflet/dist/leaflet.css';
 import { useAppSelector } from '../../hooks/redux-ts';
+import { getActiveCity, getHoveredOffer } from '../../store/app-data/app-data.selectors';
 
 type Props = {
   offers: OfferData[];
@@ -23,9 +24,9 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map({ offers, renderingPage }: Props): React.JSX.Element {
-  const city = useAppSelector((state) => state.APP.activeCity);
-  const hoveredOffer = useAppSelector((state) => state.APP.hoveredOffer);
+export default function Map({ offers, renderingPage }: Props): React.JSX.Element {
+  const city = useAppSelector(getActiveCity);
+  const hoveredOffer = useAppSelector(getHoveredOffer);
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -61,5 +62,3 @@ function Map({ offers, renderingPage }: Props): React.JSX.Element {
 
   return <section className={`${renderingPage}__map map`} ref={mapRef}></section>;
 }
-
-export default Map;

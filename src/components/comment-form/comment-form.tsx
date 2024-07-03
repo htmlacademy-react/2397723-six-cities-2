@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
 import { addReview } from '../../store/api-actions';
 import { changeComment, changeRating } from '../../store/reviews-data/reviews-data';
 import RatingInput from '../rating-input/rating-input';
+import { getIsReviewsLoading, getNewReview } from '../../store/reviews-data/reviews-data.selectors';
 
 type RatingInput = {
   value: number;
@@ -41,9 +42,9 @@ const MIN_COMMENT_LENGTH = 50;
 
 export default function CommentForm({ offerId }: CommentFormProps): React.JSX.Element {
   const dispatch = useAppDispatch();
-  const isReviewSanding = useAppSelector((state) => state.REVIEWS.isReviewSanding);
-  const comment = useAppSelector((state) => state.REVIEWS.newReview.comment);
-  const rating = useAppSelector((state) => state.REVIEWS.newReview.rating);
+  const isReviewSanding = useAppSelector(getIsReviewsLoading);
+  const comment = useAppSelector(getNewReview).comment;
+  const rating = useAppSelector(getNewReview).rating;
 
   const ratingChangeHandler = (value: number): void => {
     dispatch(changeRating(Number(value)));

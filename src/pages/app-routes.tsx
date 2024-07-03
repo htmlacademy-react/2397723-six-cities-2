@@ -10,11 +10,10 @@ import HeaderLayout from '../components/header/header-layout';
 import React from 'react';
 import { useAppSelector } from '../hooks/redux-ts';
 import { HelmetProvider } from 'react-helmet-async';
+import { getAuthorizationStatus } from '../store/user-data/user-data.selectors';
 
 export default function AppRoutes(): React.JSX.Element {
-  // TODO Попробовать react-helmet-async, ретроспектива 3.8 - 1:10:00
-
-  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <HelmetProvider>
