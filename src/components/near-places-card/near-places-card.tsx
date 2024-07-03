@@ -10,7 +10,6 @@ type Props = {
 }
 
 export default function NearPlacesCard({ offer }: Props): React.JSX.Element {
-
   return (
     <article
       className="near-places__card place-card"

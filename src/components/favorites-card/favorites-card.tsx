@@ -10,7 +10,6 @@ type Props = {
 }
 
 export default function FavoritesCard({ offer }: Props): React.JSX.Element {
-
   return (
     <article
       className="favorites__card place-card"
