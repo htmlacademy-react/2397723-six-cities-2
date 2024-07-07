@@ -1,4 +1,4 @@
-export default function Spinner(): JSX.Element {
+export function Spinner(): JSX.Element {
   return (
     <img
       className="header__logo"

@@ -7,7 +7,7 @@ type Props = {
   children: React.JSX.Element;
 }
 
-export default function PrivateRoute({ authorizationStatus, children }: Props): React.JSX.Element {
+export function PrivateRoute({ authorizationStatus, children }: Props): React.JSX.Element {
   return (
     authorizationStatus === AuthorizationStatus.Auth
       ? children

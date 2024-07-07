@@ -1,5 +1,5 @@
 import { NameSpaces } from '../../const/const';
-import { State } from '../../types/state';
+import { State } from '../../types';
 
 export const getAuthorizationStatus = (state: Pick<State, NameSpaces.User>) => state[NameSpaces.User].authorizationStatus;
 export const getUser = (state: Pick<State, NameSpaces.User>) => state[NameSpaces.User].user;

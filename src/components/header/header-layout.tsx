@@ -1,8 +1,7 @@
 import { Link, Outlet } from 'react-router-dom';
-import HeaderNav from '../header-nav/header-nav';
+import { HeaderNav, Spinner } from '../../components';
 import { AppRoute } from '../../const/const';
-import { useAppSelector } from '../../hooks/redux-ts';
-import Spinner from '../spinner/spinner';
+import { useAppSelector } from '../../hooks';
 import { getFavoritesLoading, getIsStatusSanding } from '../../store/favorites-data/favorites-data.selectors';
 import { getIsNearPlacesLoading } from '../../store/near-places-data/near-places-data.selectors';
 import { getIsOfferLoading } from '../../store/offer-data/offer-data.selectors';
@@ -10,7 +9,7 @@ import { getIsOffersLoading } from '../../store/offers-data/offers-data.selector
 import { getIsReviewSanding, getIsReviewsLoading } from '../../store/reviews-data/reviews-data.selectors';
 import { getIsCheckAuthLoading, getIsLoginLoading, getIsLogoutLoading } from '../../store/user-data/user-data.selectors';
 
-export default function HeaderLayout(): React.JSX.Element {
+export function HeaderLayout(): React.JSX.Element {
   const isOffersLoading = useAppSelector(getIsOffersLoading);
   const isOfferLoading = useAppSelector(getIsOfferLoading);
   const isNearPlacesLoading = useAppSelector(getIsNearPlacesLoading);

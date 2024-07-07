@@ -1,12 +1,12 @@
 import React from 'react';
-import { Review } from '../../types/reviews';
-import { humanizeDate, ratingToPercent } from '../../utils/common';
+import { Review } from '../../types';
+import { humanizeDate, ratingToPercent } from '../../utils';
 
 type Props = {
   review: Review;
 }
 
-export default function ReviewsItem({ review }: Props): React.JSX.Element {
+export function ReviewsItem({ review }: Props): React.JSX.Element {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">

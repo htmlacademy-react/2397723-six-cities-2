@@ -1,5 +1,5 @@
 import { NameSpaces } from '../../const/const';
-import { State } from '../../types/state';
+import { State } from '../../types';
 
 export const getReviews = (state: Pick<State, NameSpaces.Reviews>) => state[NameSpaces.Reviews].reviews;
 export const getIsReviewSanding = (state: Pick<State, NameSpaces.Reviews>) => state[NameSpaces.Reviews].isReviewSanding;

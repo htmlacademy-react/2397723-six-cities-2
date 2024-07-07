@@ -1,15 +1,17 @@
 import React from 'react';
-import CitiesCardList from '../../components/card-list/card-list';
-import Map from '../../components/map/map';
 import { Page } from '../../const/const';
-import Sort from '../../components/sort/sort';
-import { useAppSelector } from '../../hooks/redux-ts';
+import { useAppSelector } from '../../hooks';
 import CitiesTabsList from '../../components/cities-tabs-list/cities-tabs-list';
-import { sorting } from '../../utils/sort';
+import { sorting } from '../../utils';
 import { Helmet } from 'react-helmet-async';
-import MainEmpty from '../../components/main-empty/main-empty';
 import { getIsOffersLoading, getOffers } from '../../store/offers-data/offers-data.selectors';
 import { getActiveCity, getActiveSort } from '../../store/app-data/app-data.selectors';
+import {
+  CitiesCardList,
+  Map,
+  Sort,
+  MainEmpty
+} from '../../components';
 
 export default function Main(): React.JSX.Element {
   const offers = useAppSelector(getOffers);

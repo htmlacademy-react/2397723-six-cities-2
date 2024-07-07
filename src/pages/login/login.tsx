@@ -1,5 +1,5 @@
 import React, { FormEvent, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { login } from '../../store/api-actions';
 import { AppRoute, AuthorizationStatus, CityName } from '../../const/const';
 import { Link, Navigate } from 'react-router-dom';

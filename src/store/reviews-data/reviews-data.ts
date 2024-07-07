@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { NameSpaces } from '../../const/const';
 import { addReview, fetchReviews } from '../api-actions';
-import { Review } from '../../types/reviews';
+import { Review } from '../../types';
 
 const initialState: {
   reviews: Review[];

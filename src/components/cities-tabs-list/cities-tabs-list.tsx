@@ -1,5 +1,5 @@
 import React from 'react';
-import CitiesTabsItem from '../cities-tabs-item/cities-tabs-item';
+import { CitiesTabsItem } from '../../components';
 import { Cities } from '../../const/const';
 
 export default function CitiesTabsList(): React.JSX.Element {

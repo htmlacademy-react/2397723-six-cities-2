@@ -1,12 +1,12 @@
 import React from 'react';
-import { Review } from '../../types/reviews';
-import ReviewsItem from '../reviews-item/reviews-item';
+import { Review } from '../../types';
+import { ReviewsItem } from '../../components';
 
 type Props = {
   reviews: Review[];
 }
 
-export default function ReviewsList({ reviews }: Props): React.JSX.Element {
+export function ReviewsList({ reviews }: Props): React.JSX.Element {
   return (
     <ul className="reviews__list">
       {reviews.map((review) => (

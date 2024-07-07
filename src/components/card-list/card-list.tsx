@@ -1,11 +1,11 @@
-import CitiesCard from '../cities-card/cities-card';
-import { OfferData } from '../../types/offer';
+import { OfferData } from '../../types';
+import { CitiesCard } from '../../components';
 
 type Props = {
   offers: OfferData[];
 }
 
-export default function CitiesCardList({ offers }: Props): React.JSX.Element {
+export function CitiesCardList({ offers }: Props): React.JSX.Element {
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (

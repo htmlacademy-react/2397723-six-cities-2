@@ -1,10 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatch, State } from '../types/state';
+import {
+  AppDispatch,
+  State, FullOffer,
+  OfferData,
+  AuthData,
+  User,
+  Review
+} from '../types';
 import { AxiosInstance } from 'axios';
 import { APIRoute, NameSpaces } from '../const/const';
-import { FullOffer, OfferData } from '../types/offer';
-import { Review } from '../types/reviews';
-import { AuthData, User } from '../types/user';
 import { dropToken, saveToken } from '../services/token';
 
 export const fetchOffers = createAsyncThunk<OfferData[], undefined, {

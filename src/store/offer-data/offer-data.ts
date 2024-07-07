@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpaces } from '../../const/const';
-import { FullOffer } from '../../types/offer';
+import { FullOffer } from '../../types';
 import { fetchOffer, setFavoriteStatus } from '../api-actions';
 
 const initialState: {

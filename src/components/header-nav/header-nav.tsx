@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const/const';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logout } from '../../store/api-actions';
 import { getFavorites } from '../../store/favorites-data/favorites-data.selectors';
 import { getAuthorizationStatus, getUser } from '../../store/user-data/user-data.selectors';
 
-export default function HeaderNav(): React.JSX.Element {
+export function HeaderNav(): React.JSX.Element {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const favoritesLength = useAppSelector(getFavorites).length;

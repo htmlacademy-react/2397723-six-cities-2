@@ -1,15 +1,17 @@
-import PremiumLabel from '../../components/premium-label/premium-label';
-import CommentForm from '../../components/comment-form/comment-form';
-import { ratingToPercent } from '../../utils/common';
-import ReviewsList from '../../components/reviews-list/reviews-list';
-import Map from '../../components/map/map';
+import {
+  CommentForm,
+  PremiumLabel,
+  ReviewsList,
+  Map,
+  NearPlacesList,
+  OfferBookmarkButton
+} from '../../components';
+import { ratingToPercent } from '../../utils';
 import { AppRoute, AuthorizationStatus, Page } from '../../const/const';
-import NearPlacesList from '../../components/near-places-list/near-places-list';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchNearPlaces, fetchOffer, fetchReviews } from '../../store/api-actions';
-import OfferBookmarkButton from '../../components/offer-bookmark-button/offer-bookmark-button';
 import { Helmet } from 'react-helmet-async';
 import { getOffer, getOfferError } from '../../store/offer-data/offer-data.selectors';
 import { getNearPlaces } from '../../store/near-places-data/near-places-data.selectors';

@@ -1,5 +1,5 @@
 import { NameSpaces } from '../../const/const';
-import { State } from '../../types/state';
+import { State } from '../../types';
 
 export const getActiveCity = (state: Pick<State, NameSpaces.App>) => state[NameSpaces.App].activeCity;
 export const getActiveSort = (state: Pick<State, NameSpaces.App>) => state[NameSpaces.App].activeSort;

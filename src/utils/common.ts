@@ -1,6 +1,6 @@
 import { TileLayer } from 'leaflet';
 import { CityName } from '../const/const';
-import { OfferData } from '../types/offer';
+import { OfferData } from '../types';
 
 export function ratingToPercent(rating: number): string {
   return `${Math.round(rating) / 5 * 100}%`;

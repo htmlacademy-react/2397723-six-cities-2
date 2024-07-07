@@ -1,15 +1,14 @@
-import { OfferData } from '../../types/offer';
+import { OfferData } from '../../types';
 import { Link, generatePath } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
-import PremiumLabel from '../premium-label/premium-label';
-import { ratingToPercent } from '../../utils/common';
-import PlaceCardBookmarkButton from '../place-card-bookmark-button/place-card-bookmark-button';
+import { PremiumLabel, PlaceCardBookmarkButton } from '../../components';
+import { ratingToPercent } from '../../utils';
 
 type Props = {
   offer: OfferData;
 }
 
-export default function FavoritesCard({ offer }: Props): React.JSX.Element {
+export function FavoritesCard({ offer }: Props): React.JSX.Element {
   return (
     <article
       className="favorites__card place-card"

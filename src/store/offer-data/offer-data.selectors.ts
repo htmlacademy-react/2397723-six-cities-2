@@ -1,5 +1,5 @@
 import { NameSpaces } from '../../const/const';
-import { State } from '../../types/state';
+import { State } from '../../types';
 
 export const getOffer = (state: Pick<State, NameSpaces.Offer>) => state[NameSpaces.Offer].offer;
 export const getOfferError = (state: Pick<State, NameSpaces.Offer>) => state[NameSpaces.Offer].hasError;
