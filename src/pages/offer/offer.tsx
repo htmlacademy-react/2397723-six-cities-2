@@ -7,7 +7,7 @@ import {
   OfferBookmarkButton
 } from '../../components';
 import { ratingToPercent } from '../../utils';
-import { AppRoute, AuthorizationStatus, Page } from '../../const/const';
+import { AppRoute, AuthorizationStatus } from '../../const/const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -121,14 +121,15 @@ export default function Offer(): React.JSX.Element | undefined {
               </div>
             </div>
             <div style={{ padding: '0 58px' }}>
-              <Map offers={nearPlaces} renderingPage={Page.Offer} />
+              <Map offers={nearPlaces} className='offer__map' />
             </div>
           </section>
-          <div className="container">
-            <NearPlacesList
-              nearPlaces={nearPlaces}
-            />
-          </div>
+          <section className="near-places places">
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <div className="container">
+              <NearPlacesList />
+            </div>
+          </section>
         </main>
       </>
     );

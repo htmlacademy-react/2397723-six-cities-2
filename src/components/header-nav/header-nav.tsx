@@ -4,8 +4,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logout } from '../../store/api-actions';
 import { getFavorites } from '../../store/favorites-data/favorites-data.selectors';
 import { getAuthorizationStatus, getUser } from '../../store/user-data/user-data.selectors';
+import { memo } from 'react';
 
-export function HeaderNav(): React.JSX.Element {
+function HeaderNavComponent(): React.JSX.Element {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const favoritesLength = useAppSelector(getFavorites).length;
@@ -43,3 +44,5 @@ export function HeaderNav(): React.JSX.Element {
     </nav>
   );
 }
+
+export const HeaderNav = memo(HeaderNavComponent);

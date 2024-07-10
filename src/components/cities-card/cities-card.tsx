@@ -5,22 +5,25 @@ import { ratingToPercent } from '../../utils/common';
 import { useAppDispatch } from '../../hooks';
 import { PremiumLabel, PlaceCardBookmarkButton } from '../../components';
 import { changeHoveredOffer } from '../../store/app-data/app-data';
+import React from 'react';
+import cn from 'classnames';
 
 type Props = {
   offer: OfferData;
+  className: string;
 }
 
-export function CitiesCard({ offer }: Props): React.JSX.Element {
+function CitiesCardComponent({ offer, className }: Props): React.JSX.Element {
   const dispatch = useAppDispatch();
   const handleOffersItemHover = () => dispatch(changeHoveredOffer(offer));
 
   return (
     <article
-      className="cities__card place-card"
-      onMouseEnter={handleOffersItemHover}
+      className={cn(`${className}__card`, 'place-card')}
+      onMouseEnter={className === 'cities' ? handleOffersItemHover : undefined}
     >
       {offer.isPremium && <PremiumLabel />}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={cn(`${className}__image-wrapper`, 'place-card__image-wrapper')}>
         <Link to={generatePath(AppRoute.Offer, { id: offer.id })}>
           <img
             className="place-card__image"
@@ -37,7 +40,7 @@ export function CitiesCard({ offer }: Props): React.JSX.Element {
             <b className="place-card__price-value">{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <PlaceCardBookmarkButton offerId={offer.id} status={offer.isFavorite}/>
+          <PlaceCardBookmarkButton offerId={offer.id} status={offer.isFavorite} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -53,3 +56,5 @@ export function CitiesCard({ offer }: Props): React.JSX.Element {
     </article >
   );
 }
+
+export const CitiesCard = React.memo(CitiesCardComponent);

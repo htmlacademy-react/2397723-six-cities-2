@@ -8,8 +8,9 @@ import { getIsOfferLoading } from '../../store/offer-data/offer-data.selectors';
 import { getIsOffersLoading } from '../../store/offers-data/offers-data.selectors';
 import { getIsReviewSanding, getIsReviewsLoading } from '../../store/reviews-data/reviews-data.selectors';
 import { getIsCheckAuthLoading, getIsLoginLoading, getIsLogoutLoading } from '../../store/user-data/user-data.selectors';
+import React, { memo } from 'react';
 
-export function HeaderLayout(): React.JSX.Element {
+function HeaderLayoutComponent(): React.JSX.Element {
   const isOffersLoading = useAppSelector(getIsOffersLoading);
   const isOfferLoading = useAppSelector(getIsOfferLoading);
   const isNearPlacesLoading = useAppSelector(getIsNearPlacesLoading);
@@ -51,3 +52,5 @@ export function HeaderLayout(): React.JSX.Element {
     </div >
   );
 }
+
+export const HeaderLayout = memo(HeaderLayoutComponent);
