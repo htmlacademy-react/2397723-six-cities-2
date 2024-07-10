@@ -1,24 +1,30 @@
-import PremiumLabel from '../../components/premium-label/premium-label';
-import CommentForm from '../../components/comment-form/comment-form';
-import { ratingToPercent } from '../../utils/common';
-import ReviewsList from '../../components/reviews-list/reviews-list';
-import Map from '../../components/map/map';
+import {
+  CommentForm,
+  PremiumLabel,
+  ReviewsList,
+  Map,
+  NearPlacesList,
+  OfferBookmarkButton
+} from '../../components';
+import { ratingToPercent } from '../../utils';
 import { AppRoute, AuthorizationStatus, Page } from '../../const/const';
-import NearPlacesList from '../../components/near-places-list/near-places-list';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchNearPlaces, fetchOffer, fetchReviews } from '../../store/api-actions';
-import OfferBookmarkButton from '../../components/offer-bookmark-button/offer-bookmark-button';
 import { Helmet } from 'react-helmet-async';
+import { getOffer, getOfferError } from '../../store/offer-data/offer-data.selectors';
+import { getNearPlaces } from '../../store/near-places-data/near-places-data.selectors';
+import { getReviews } from '../../store/reviews-data/reviews-data.selectors';
+import { getAuthorizationStatus } from '../../store/user-data/user-data.selectors';
 
 export default function Offer(): React.JSX.Element | undefined {
   const dispatch = useAppDispatch();
-  const offer = useAppSelector((state) => state.OFFER.offer);
-  const offerError = useAppSelector((state) => state.OFFER.hasError);
-  const nearPlaces = useAppSelector((state) => state.NEAR_PLACES.nearPlaces);
-  const reviews = useAppSelector((state) => state.REVIEWS.reviews);
-  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
+  const offer = useAppSelector(getOffer);
+  const offerError = useAppSelector(getOfferError);
+  const nearPlaces = useAppSelector(getNearPlaces);
+  const reviews = useAppSelector(getReviews);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -115,7 +121,7 @@ export default function Offer(): React.JSX.Element | undefined {
               </div>
             </div>
             <div style={{ padding: '0 58px' }}>
-              <Map offers={nearPlaces} selectedOffer={undefined} renderingPage={Page.Offer} />
+              <Map offers={nearPlaces} renderingPage={Page.Offer} />
             </div>
           </section>
           <div className="container">

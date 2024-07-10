@@ -1,16 +1,17 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../const/const';
 import { useNavigate } from 'react-router-dom';
 import { setFavoriteStatus } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user-data/user-data.selectors';
 
 type Props = {
   offerId: string;
   status: boolean;
 };
 
-export default function PlaceCardBookmarkButton({ offerId, status }: Props): React.JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
+export function PlaceCardBookmarkButton({ offerId, status }: Props): React.JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

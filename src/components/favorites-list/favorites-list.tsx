@@ -1,8 +1,8 @@
 import React from 'react';
-import { OfferData } from '../../types/offer';
+import { OfferData } from '../../types';
 import { CityName } from '../../const/const';
-import FavoritesPlaces from '../favorites-location-item/favorites-location-item';
-import { getCityOffers } from '../../utils/common';
+import { FavoritesPlaces } from '../../components';
+import { getCityOffers } from '../../utils';
 
 type Props = {
   favoriteOffers: OfferData[];

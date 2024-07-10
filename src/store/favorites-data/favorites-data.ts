@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpaces } from '../../const/const';
-import { OfferData } from '../../types/offer';
+import { OfferData } from '../../types';
 import { fetchFavorites, setFavoriteStatus } from '../api-actions';
 
 const initialState: {

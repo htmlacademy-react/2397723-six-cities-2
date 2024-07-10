@@ -1,14 +1,14 @@
 import React from 'react';
 import { SortOption } from '../../const/const';
-import { useAppDispatch } from '../../hooks/redux-ts';
-import { changeSortOption } from '../../store/app-data/app-action';
+import { useAppDispatch } from '../../hooks';
+import { changeSortOption } from '../../store/app-data/app-data';
 
 type Props = {
   activeOption: string;
   closeSortOptions: () => void;
 }
 
-export default function SortOptions({ activeOption, closeSortOptions }: Props): React.JSX.Element {
+export function SortOptions({ activeOption, closeSortOptions }: Props): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const onChangeSortOptionHandler = (option: string) => {

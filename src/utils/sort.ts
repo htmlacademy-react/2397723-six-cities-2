@@ -1,4 +1,4 @@
-import { OfferData } from '../types/offer';
+import { OfferData } from '../types';
 
 function sortByRating(a: OfferData, b: OfferData) {
   return b.rating - a.rating;

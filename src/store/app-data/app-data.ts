@@ -1,27 +1,31 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Cities, CityName, NameSpaces, SortOption } from '../../const/const';
-import { City } from '../../types/offer';
-import { changeActiveCity, changeSortOption } from './app-action';
+import { City, OfferData } from '../../types';
 
 const initialState: {
   activeCity?: City;
   activeSort: string;
+  hoveredOffer: OfferData | undefined;
 } = {
   activeCity: Cities.find((city) => city.name === CityName.Paris),
   activeSort: SortOption[0],
+  hoveredOffer: undefined
 };
 
 export const appData = createSlice({
   name: NameSpaces.App,
   initialState,
-  reducers: {},
-  extraReducers(builder) {
-    builder
-      .addCase(changeActiveCity, (state, action) => {
-        state.activeCity = Cities.find((city) => city.name === action.payload);
-      })
-      .addCase(changeSortOption, (state, action) => {
-        state.activeSort = action.payload;
-      });
-  }
+  reducers: {
+    changeActiveCity: (state, action) => {
+      state.activeCity = Cities.find((city) => city.name === action.payload);
+    },
+    changeSortOption: (state, action: PayloadAction<string>) => {
+      state.activeSort = action.payload;
+    },
+    changeHoveredOffer: (state, action: PayloadAction<OfferData | undefined>) => {
+      state.hoveredOffer = action.payload;
+    }
+  },
 });
+
+export const { changeActiveCity, changeSortOption, changeHoveredOffer } = appData.actions;

@@ -1,8 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { NameSpaces } from '../../const/const';
 import { addReview, fetchReviews } from '../api-actions';
-import { Review } from '../../types/reviews';
-import { changeComment, changeRating } from './reviews-action';
+import { Review } from '../../types';
 
 const initialState: {
   reviews: Review[];
@@ -27,7 +26,14 @@ const initialState: {
 export const reviewsData = createSlice({
   name: NameSpaces.Reviews,
   initialState,
-  reducers: {},
+  reducers: {
+    changeComment: (state, action: PayloadAction<string>) => {
+      state.newReview.comment = action.payload;
+    },
+    changeRating: (state, action: PayloadAction<number | null>) => {
+      state.newReview.rating = action.payload;
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchReviews.pending, (state) => {
@@ -53,12 +59,8 @@ export const reviewsData = createSlice({
       .addCase(addReview.rejected, (state) => {
         state.isReviewSanding = false;
         state.hasError = true;
-      })
-      .addCase(changeComment, (state, action) => {
-        state.newReview.comment = action.payload;
-      })
-      .addCase(changeRating, (state, action) => {
-        state.newReview.rating = action.payload;
       });
   }
 });
+
+export const {changeComment, changeRating} = reviewsData.actions;

@@ -1,4 +1,4 @@
-import { City } from '../types/offer';
+import { City } from '../types';
 
 export enum AppRoute {
   Main = '/',

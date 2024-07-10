@@ -1,12 +1,12 @@
 import React from 'react';
-import NearPlacesCard from '../near-places-card/near-places-card';
-import { OfferData } from '../../types/offer';
+import { NearPlacesCard } from '../../components';
+import { OfferData } from '../../types';
 
 type Props = {
   nearPlaces: OfferData[];
 }
 
-export default function NearPlacesList({ nearPlaces }: Props): React.JSX.Element {
+export function NearPlacesList({ nearPlaces }: Props): React.JSX.Element {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>

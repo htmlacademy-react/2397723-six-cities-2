@@ -1,14 +1,16 @@
 import React, { useRef, useEffect } from 'react';
 import { Icon, Marker, layerGroup } from 'leaflet';
-import useMap from '../../hooks/use-map';
-import { OfferData } from '../../types/offer';
+import { OfferData } from '../../types';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const/const';
 import 'leaflet/dist/leaflet.css';
-import { useAppSelector } from '../../hooks/redux-ts';
+import {
+  useAppSelector,
+  useMap
+} from '../../hooks';
+import { getActiveCity, getHoveredOffer } from '../../store/app-data/app-data.selectors';
 
 type Props = {
   offers: OfferData[];
-  selectedOffer: OfferData | undefined;
   renderingPage: string;
 };
 
@@ -24,8 +26,9 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map({ offers, selectedOffer, renderingPage }: Props): React.JSX.Element {
-  const city = useAppSelector((state) => state.APP.activeCity);
+export function Map({ offers, renderingPage }: Props): React.JSX.Element {
+  const city = useAppSelector(getActiveCity);
+  const hoveredOffer = useAppSelector(getHoveredOffer);
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -46,7 +49,7 @@ function Map({ offers, selectedOffer, renderingPage }: Props): React.JSX.Element
 
         marker
           .setIcon(
-            selectedOffer !== undefined && offer.id === selectedOffer.id
+            hoveredOffer !== undefined && offer.id === hoveredOffer.id
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -57,9 +60,7 @@ function Map({ offers, selectedOffer, renderingPage }: Props): React.JSX.Element
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedOffer, city]);
+  }, [map, offers, hoveredOffer, city]);
 
   return <section className={`${renderingPage}__map map`} ref={mapRef}></section>;
 }
-
-export default Map;

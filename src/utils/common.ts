@@ -1,9 +1,9 @@
 import { TileLayer } from 'leaflet';
 import { CityName } from '../const/const';
-import { OfferData } from '../types/offer';
+import { OfferData } from '../types';
 
 export function ratingToPercent(rating: number): string {
-  return `${rating / 5 * 100}%`;
+  return `${Math.round(rating) / 5 * 100}%`;
 }
 
 export function getCityOffers(cityName: CityName, favoriteOffers: OfferData[]): OfferData[] | undefined {

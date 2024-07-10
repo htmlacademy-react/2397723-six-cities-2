@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import FavoritesList from '../../components/favorites-list/favorites-list';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Link, useParams } from 'react-router-dom';
 import { fetchFavorites } from '../../store/api-actions';
 import { AppRoute } from '../../const/const';
-import { OfferData } from '../../types/offer';
+import { OfferData } from '../../types';
 import { Helmet } from 'react-helmet-async';
+import { getFavorites } from '../../store/favorites-data/favorites-data.selectors';
 
 type NotEmptyFavoritesProps = {
   favorites: OfferData[];
@@ -47,7 +48,7 @@ export default function Favorites(): React.JSX.Element {
   useEffect(() => {
     dispatch(fetchFavorites());
   }, [dispatch, currentOffer.id]);
-  const favorites = useAppSelector((state) => state.FAVORITES.favorites);
+  const favorites = useAppSelector(getFavorites);
 
   return (
     <>

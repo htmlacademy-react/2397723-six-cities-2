@@ -5,7 +5,7 @@ type RatingInputProps = {
   handleInputChange: (value: number) => void | undefined;
 }
 
-export default function RatingInput({ rating, value, title, handleInputChange }: RatingInputProps): React.JSX.Element {
+export function RatingInput({ rating, value, title, handleInputChange }: RatingInputProps): React.JSX.Element {
   return (
     <>
       <input

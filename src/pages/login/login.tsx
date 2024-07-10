@@ -1,16 +1,17 @@
 import React, { FormEvent, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-ts';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { login } from '../../store/api-actions';
 import { AppRoute, AuthorizationStatus, CityName } from '../../const/const';
 import { Link, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { changeActiveCity } from '../../store/app-data/app-action';
+import { changeActiveCity } from '../../store/app-data/app-data';
+import { getAuthorizationStatus } from '../../store/user-data/user-data.selectors';
 
 export default function Login(): React.JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const cities = Object.values(CityName);
   const randomCity = cities[Math.floor(Math.random() * cities.length)];

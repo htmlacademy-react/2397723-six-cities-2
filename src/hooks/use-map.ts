@@ -1,9 +1,9 @@
 import { useEffect, useState, MutableRefObject, useRef } from 'react';
 import { Map } from 'leaflet';
-import { City } from '../types/offer';
-import { createLayer } from '../utils/common';
+import { City } from '../types';
+import { createLayer } from '../utils';
 
-function useMap(
+export function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
   city: City | undefined
 ): Map | null {
@@ -27,5 +27,3 @@ function useMap(
 
   return map;
 }
-
-export default useMap;

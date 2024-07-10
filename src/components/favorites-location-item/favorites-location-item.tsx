@@ -1,12 +1,12 @@
 import React from 'react';
-import { OfferData } from '../../types/offer';
-import FavoritesCard from '../favorites-card/favorites-card';
+import { OfferData } from '../../types';
+import { FavoritesCard } from '../../components';
 
 type Props = {
   offers: OfferData[];
 }
 
-export default function FavoritesPlaces({ offers }: Props): React.JSX.Element {
+export function FavoritesPlaces({ offers }: Props): React.JSX.Element {
   return (
     <div className="favorites__places">
       {offers.map((offer: OfferData): React.JSX.Element => (
