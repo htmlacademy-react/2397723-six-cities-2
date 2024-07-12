@@ -5,6 +5,7 @@ import { getNearPlaces } from '../../store/near-places-data/near-places-data.sel
 
 export function NearPlacesList(): React.JSX.Element {
   const nearPlaces = useAppSelector(getNearPlaces);
+
   return (
     <div className="near-places__list places__list">
       {

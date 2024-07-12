@@ -1,12 +1,9 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './not-found.css';
-import { AppRoute } from '../../const/const';
 import { Helmet } from 'react-helmet-async';
 
 export default function NotFound(): React.JSX.Element {
-  const navigate = useNavigate();
-  navigate(AppRoute.NotFound);
   return (
     <>
       <Helmet title='Not Found' />

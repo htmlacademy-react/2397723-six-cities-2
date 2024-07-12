@@ -6,7 +6,7 @@ import Offer from './offer/offer';
 import NotFound from './not-found/not-found';
 import Main from './main/main';
 import {
-  HeaderLayout,
+  Header,
   PrivateRoute
 } from '../components';
 import React from 'react';
@@ -20,7 +20,7 @@ export default function AppRoutes(): React.JSX.Element {
   return (
     <HelmetProvider>
       <Routes>
-        <Route path={AppRoute.Main} element={<HeaderLayout />}>
+        <Route path={AppRoute.Main} element={<Header />}>
           <Route
             index
             element={<Main />}

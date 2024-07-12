@@ -10,7 +10,7 @@ import { getIsReviewSanding, getIsReviewsLoading } from '../../store/reviews-dat
 import { getIsCheckAuthLoading, getIsLoginLoading, getIsLogoutLoading } from '../../store/user-data/user-data.selectors';
 import React, { memo } from 'react';
 
-function HeaderLayoutComponent(): React.JSX.Element {
+function HeaderComponent(): React.JSX.Element {
   const isOffersLoading = useAppSelector(getIsOffersLoading);
   const isOfferLoading = useAppSelector(getIsOfferLoading);
   const isNearPlacesLoading = useAppSelector(getIsNearPlacesLoading);
@@ -53,4 +53,4 @@ function HeaderLayoutComponent(): React.JSX.Element {
   );
 }
 
-export const HeaderLayout = memo(HeaderLayoutComponent);
+export const Header = memo(HeaderComponent);

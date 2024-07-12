@@ -10,7 +10,7 @@ type RatingInput = {
   title: string;
 }
 
-type CommentFormProps = {
+type Props = {
   offerId: string;
 }
 
@@ -40,32 +40,30 @@ const ratingInputs: RatingInput[] = [
 const INITIAL_RATING = null;
 const MIN_COMMENT_LENGTH = 50;
 
-export function CommentForm({ offerId }: CommentFormProps): React.JSX.Element {
+export function CommentForm({ offerId }: Props): React.JSX.Element {
   const dispatch = useAppDispatch();
   const isReviewSanding = useAppSelector(getIsReviewsLoading);
   const comment = useAppSelector(getNewReview).comment;
   const rating = useAppSelector(getNewReview).rating;
+  const examConditions = (): boolean => rating === INITIAL_RATING || comment.length < MIN_COMMENT_LENGTH || isReviewSanding;
 
-  const ratingChangeHandler = (value: number): void => {
+  const handleRatingChange = (value: number): void => {
     dispatch(changeRating(Number(value)));
   };
-  const commentChangeHandler = (value: string): void => {
+  const handleCommentChange = (value: string): void => {
     dispatch(changeComment(value));
   };
-
   const submitHandler = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(addReview({ offerId, comment, rating }));
   };
-
-  const examConditions = (): boolean => rating === INITIAL_RATING || comment.length < MIN_COMMENT_LENGTH || isReviewSanding;
 
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={submitHandler}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {
-          ratingInputs.map((input) => <RatingInput key={input.value} rating={rating} value={input.value} title={input.title} handleInputChange={ratingChangeHandler} />)
+          ratingInputs.map((input) => <RatingInput key={input.value} rating={rating} value={input.value} title={input.title} onInputChange={handleRatingChange} />)
         }
       </div>
       <textarea
@@ -73,7 +71,7 @@ export function CommentForm({ offerId }: CommentFormProps): React.JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={(event) => commentChangeHandler(event.target.value)}
+        onChange={(event) => handleCommentChange(event.target.value)}
         value={comment}
       >
       </textarea>

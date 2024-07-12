@@ -12,7 +12,7 @@ function HeaderNavComponent(): React.JSX.Element {
   const favoritesLength = useAppSelector(getFavorites).length;
   const user = useAppSelector(getUser);
 
-  const logoutHandler = () => {
+  const handleLogout = () => {
     dispatch(logout());
   };
 
@@ -31,7 +31,7 @@ function HeaderNavComponent(): React.JSX.Element {
             </li>
             <li className="header__nav-item">
               <Link className="header__nav-link" to={AppRoute.Main}>
-                <span className="header__signout" onClick={logoutHandler}>Sign out</span>
+                <span className="header__signout" onClick={handleLogout}>Sign out</span>
               </Link>
             </li>
           </> :

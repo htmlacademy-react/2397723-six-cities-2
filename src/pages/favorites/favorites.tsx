@@ -8,11 +8,11 @@ import { OfferData } from '../../types';
 import { Helmet } from 'react-helmet-async';
 import { getFavorites } from '../../store/favorites-data/favorites-data.selectors';
 
-type NotEmptyFavoritesProps = {
+type Props = {
   favorites: OfferData[];
 }
 
-function NotEmptyFavorites({ favorites }: NotEmptyFavoritesProps): React.JSX.Element {
+function NotEmptyFavorites({ favorites }: Props): React.JSX.Element {
   return (
     <main className="page__main page__main--favorites">
       <div className="page__favorites-container container">
@@ -43,12 +43,12 @@ function EmptyFavorites(): React.JSX.Element {
 
 export default function Favorites(): React.JSX.Element {
   const dispatch = useAppDispatch();
+  const favorites = useAppSelector(getFavorites);
   const currentOffer = useParams();
 
   useEffect(() => {
     dispatch(fetchFavorites());
   }, [dispatch, currentOffer.id]);
-  const favorites = useAppSelector(getFavorites);
 
   return (
     <>

@@ -11,7 +11,7 @@ type Props = {
 export function SortOptions({ activeOption, closeSortOptions }: Props): React.JSX.Element {
   const dispatch = useAppDispatch();
 
-  const onChangeSortOptionHandler = (option: string) => {
+  const handleSortOptionChange = (option: string) => {
     dispatch(changeSortOption(option));
     closeSortOptions();
   };
@@ -23,7 +23,7 @@ export function SortOptions({ activeOption, closeSortOptions }: Props): React.JS
           key={option}
           className={`places__option ${option === activeOption ? 'places__option--active' : ''}`}
           tabIndex={0}
-          onClick={() => onChangeSortOptionHandler(option)}
+          onClick={() => handleSortOptionChange(option)}
         >{option}
         </li>))}
     </ul>

@@ -12,7 +12,7 @@ export function CitiesTabsItem({ cityName }: Props): React.JSX.Element {
   const activeCity = useAppSelector(getActiveCity);
   const dispatch = useAppDispatch();
 
-  const changeActiveCityHandler = () => {
+  const handleActiveCityChange = () => {
     dispatch(changeActiveCity(cityName));
   };
 
@@ -21,7 +21,7 @@ export function CitiesTabsItem({ cityName }: Props): React.JSX.Element {
       <Link
         className={`locations__item-link tabs__item ${cityName === activeCity?.name ? 'tabs__item--active' : ''}`}
         to='..'
-        onClick={changeActiveCityHandler}
+        onClick={handleActiveCityChange}
       >
         <span>{cityName}</span>
       </Link>

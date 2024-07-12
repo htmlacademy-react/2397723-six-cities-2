@@ -4,6 +4,7 @@ import { getActiveCity } from '../../store/app-data/app-data.selectors';
 
 export function MainEmpty(): React.JSX.Element {
   const activeCity = useAppSelector(getActiveCity);
+
   return (
     <div className="cities__places-container cities__places-container--empty container">
       <section className="cities__no-places">

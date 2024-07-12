@@ -11,16 +11,16 @@ type Props = {
 };
 
 export function PlaceCardBookmarkButton({ offerId, status }: Props): React.JSX.Element {
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const isAuth = authorizationStatus === AuthorizationStatus.Auth;
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const navigate = useNavigate();
+  const isAuth = authorizationStatus === AuthorizationStatus.Auth;
 
-  const addFavoriteHandler = () => {
+  const handleAddFavorite = () => {
     dispatch(setFavoriteStatus({ offerId, status }));
   };
 
-  const redirectToLogin = () => {
+  const handleRedirectToLogin = () => {
     navigate(AppRoute.Login);
   };
 
@@ -28,7 +28,7 @@ export function PlaceCardBookmarkButton({ offerId, status }: Props): React.JSX.E
     <button
       className={`${status ? 'place-card__bookmark-button--active' : ''} place-card__bookmark-button button`}
       type="button"
-      onClick={isAuth ? addFavoriteHandler : redirectToLogin}
+      onClick={isAuth ? handleAddFavorite : handleRedirectToLogin}
     >
       <svg className="place-card__bookmark-icon" width="18" height="19">
         < use xlinkHref="#icon-bookmark" ></use >

@@ -1,11 +1,11 @@
-type RatingInputProps = {
+type Props = {
   rating: number | null;
   value: number;
   title: string;
-  handleInputChange: (value: number) => void | undefined;
+  onInputChange: (value: number) => void | undefined;
 }
 
-export function RatingInput({ rating, value, title, handleInputChange }: RatingInputProps): React.JSX.Element {
+export function RatingInput({ rating, value, title, onInputChange }: Props): React.JSX.Element {
   return (
     <>
       <input
@@ -14,7 +14,7 @@ export function RatingInput({ rating, value, title, handleInputChange }: RatingI
         value={value}
         id={`${value}-stars`}
         type="radio"
-        onChange={() => handleInputChange(value)}
+        onChange={() => onInputChange(value)}
         checked={value === rating}
       />
       <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={title}>

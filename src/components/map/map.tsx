@@ -7,7 +7,6 @@ import {
   useMap
 } from '../../hooks';
 import { getActiveCity, getHoveredOffer } from '../../store/app-data/app-data.selectors';
-import { getOffersByCity } from '../../store/offers-data/offers-data.selectors';
 import classNames from 'classnames';
 import { OfferData } from '../../types';
 
@@ -31,7 +30,6 @@ const currentCustomIcon = new Icon({
 function MapComponent({ className, offers }: Props): React.JSX.Element {
   const city = useAppSelector(getActiveCity);
   const hoveredOffer = useAppSelector(getHoveredOffer);
-  // const offersByCity = useAppSelector(getOffersByCity);
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
