@@ -26,3 +26,34 @@ export function humanizeDate(date: string): string {
   const month = data.toLocaleString('en', { month: 'long' });
   return `${month} ${year}`;
 }
+
+function getRandomInteger(amount: number): number {
+  const lower = Math.ceil(Math.min(0, amount));
+  const upper = Math.floor(Math.max(0, amount));
+  const result = Math.random() * (upper - lower + 1) + lower;
+  return Math.floor(result);
+}
+
+function getRandomIndexes(maxCount: number, amount: number): number[] {
+  const chosenIndexes: number[] = [];
+  while (chosenIndexes.length < maxCount) {
+    let currentIndex = getRandomInteger(amount - 1);
+    while (chosenIndexes.includes(currentIndex)) {
+      currentIndex = getRandomInteger(amount);
+    }
+    chosenIndexes.push(currentIndex);
+  }
+  return chosenIndexes;
+}
+
+export function getRandomNearPlaces(maxCount: number, nearPlaces: OfferData[]): OfferData[] {
+  if (nearPlaces.length <= maxCount) {
+    return nearPlaces;
+  }
+  const chosenPlaces = [];
+  const randomIndexes = getRandomIndexes(maxCount, nearPlaces.length);
+  for (let i = 0; i < randomIndexes.length; i++) {
+    chosenPlaces.push(nearPlaces[randomIndexes[i]]);
+  }
+  return chosenPlaces;
+}

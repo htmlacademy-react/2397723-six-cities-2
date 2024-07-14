@@ -1,11 +1,12 @@
 import React from 'react';
 import { CitiesCard } from '../../components';
-import { useAppSelector } from '../../hooks';
-import { getNearPlaces } from '../../store/near-places-data/near-places-data.selectors';
+import { OfferData } from '../../types';
 
-export function NearPlacesList(): React.JSX.Element {
-  const nearPlaces = useAppSelector(getNearPlaces);
+type Props = {
+  nearPlaces: OfferData[];
+}
 
+export function NearPlacesList({nearPlaces}: Props): React.JSX.Element {
   return (
     <div className="near-places__list places__list">
       {

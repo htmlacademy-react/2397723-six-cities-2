@@ -14,15 +14,16 @@ import { useEffect } from 'react';
 import { fetchNearPlaces, fetchOffer, fetchReviews } from '../../store/api-actions';
 import { Helmet } from 'react-helmet-async';
 import { getOffer, getOfferError } from '../../store/offer-data/offer-data.selectors';
-import { getNearPlaces } from '../../store/near-places-data/near-places-data.selectors';
+import { getRandomNearPlaces } from '../../store/near-places-data/near-places-data.selectors';
 import { getReviews } from '../../store/reviews-data/reviews-data.selectors';
 import { getAuthorizationStatus } from '../../store/user-data/user-data.selectors';
+import { changeHoveredOffer } from '../../store/app-data/app-data';
 
 export default function Offer(): React.JSX.Element | undefined {
   const dispatch = useAppDispatch();
   const offer = useAppSelector(getOffer);
   const offerError = useAppSelector(getOfferError);
-  const nearPlaces = useAppSelector(getNearPlaces);
+  const nearPlaces = useAppSelector(getRandomNearPlaces);
   const reviews = useAppSelector(getReviews);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const { id } = useParams();
@@ -30,6 +31,7 @@ export default function Offer(): React.JSX.Element | undefined {
 
   useEffect(() => {
     if (id) {
+      dispatch(changeHoveredOffer(undefined));
       dispatch(fetchOffer(id));
       dispatch(fetchNearPlaces(id));
       dispatch(fetchReviews(id));
@@ -41,6 +43,8 @@ export default function Offer(): React.JSX.Element | undefined {
   }
 
   if (offer) {
+    const mapPlaces = [...nearPlaces, offer];
+
     return (
       <>
         <Helmet title='Offer' />
@@ -119,14 +123,14 @@ export default function Offer(): React.JSX.Element | undefined {
                 </section>
               </div>
             </div>
-            <div style={{ padding: '0 58px' }}>
-              <Map offers={nearPlaces} className='offer__map' />
+            <div style={{ padding: '0 58px', maxWidth: '1144px', margin: 'auto' }}>
+              {nearPlaces && <Map offers={mapPlaces} className='offer__map' currentOfferId={offer.id}/>}
             </div>
           </section>
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="container">
-              <NearPlacesList />
+              {nearPlaces && <NearPlacesList nearPlaces={nearPlaces} />}
             </div>
           </section>
         </main>

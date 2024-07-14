@@ -13,6 +13,7 @@ import { OfferData } from '../../types';
 type Props = {
   offers: OfferData[];
   className: string;
+  currentOfferId?: string;
 };
 
 const defaultCustomIcon = new Icon({
@@ -27,10 +28,12 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function MapComponent({ className, offers }: Props): React.JSX.Element {
-  const city = useAppSelector(getActiveCity);
+function MapComponent({ className, offers, currentOfferId }: Props): React.JSX.Element {
+  const activeCity = useAppSelector(getActiveCity);
   const hoveredOffer = useAppSelector(getHoveredOffer);
   const mapRef = useRef(null);
+  const markedIcon = currentOfferId ? currentOfferId : hoveredOffer?.id;
+  const city = className === 'cities__map' ? activeCity : offers[0].city;
   const map = useMap(mapRef, city);
 
   useEffect(() => {
@@ -50,7 +53,7 @@ function MapComponent({ className, offers }: Props): React.JSX.Element {
 
         marker
           .setIcon(
-            hoveredOffer !== undefined && offer.id === hoveredOffer.id
+            offer.id === markedIcon
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -61,7 +64,7 @@ function MapComponent({ className, offers }: Props): React.JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, hoveredOffer, city]);
+  }, [map, offers, hoveredOffer, markedIcon, city]);
 
   return <section className={classNames(className, 'map')} ref={mapRef}></section>;
 }
