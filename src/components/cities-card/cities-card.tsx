@@ -2,25 +2,24 @@ import { OfferData } from '../../types';
 import { Link, generatePath } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
 import { ratingToPercent } from '../../utils/common';
-import { useAppDispatch } from '../../hooks';
 import { PremiumLabel, PlaceCardBookmarkButton } from '../../components';
-import { changeHoveredOffer } from '../../store/app-data/app-data';
 import React from 'react';
 import cn from 'classnames';
+
+type OnMouseEnterProp = {
+  onMouseEnter?(offer: OfferData): void;
+}
 
 type Props = {
   offer: OfferData;
   className: string;
-}
+} & OnMouseEnterProp
 
-function CitiesCardComponent({ offer, className }: Props): React.JSX.Element {
-  const dispatch = useAppDispatch();
-  const handleOffersItemHover = () => dispatch(changeHoveredOffer(offer));
-
+function CitiesCardComponent({ offer, className, onMouseEnter }: Props): React.JSX.Element {
   return (
     <article
       className={cn(`${className}__card`, 'place-card')}
-      onMouseEnter={className === 'cities' ? handleOffersItemHover : undefined}
+      onMouseEnter={onMouseEnter && (() => onMouseEnter(offer))}
     >
       {offer.isPremium && <PremiumLabel />}
       <div className={cn(`${className}__image-wrapper`, 'place-card__image-wrapper')}>
