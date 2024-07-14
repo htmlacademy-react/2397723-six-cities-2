@@ -107,7 +107,6 @@ export default function Offer(): React.JSX.Element | undefined {
                       </span>}
                   </div>
                   <div className="offer__description">
-                    {/* TODO каждое предложение в своем абзаце? */}
                     <p className="offer__text">
                       {offer.description}
                     </p>
