@@ -22,8 +22,7 @@ export default function Main(): React.JSX.Element {
         <main className={`page__main page__main--index ${offersByCity.length < 1 ? 'page__main--index-empty' : ''}`}>
           <CitiesTabsList />
           <div className="cities">
-            {!isLoading && offersByCity.length < 1 && <MainEmpty />}
-            {!isLoading && offersByCity.length > 0 &&
+            {!isLoading && offersByCity.length > 0 ? (
               <div className="cities__places-container container">
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
@@ -37,7 +36,8 @@ export default function Main(): React.JSX.Element {
                     offers={offersByCity}
                   />
                 </div>
-              </div>}
+              </div>
+            ) : <MainEmpty />}
           </div>
         </main>
       </div>
