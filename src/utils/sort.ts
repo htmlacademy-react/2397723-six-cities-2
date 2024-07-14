@@ -1,4 +1,4 @@
-import { OfferData } from '../types';
+import { OfferData, Review } from '../types';
 
 function sortByRating(a: OfferData, b: OfferData) {
   return b.rating - a.rating;
@@ -9,6 +9,11 @@ function sortHighToLow(a: OfferData, b: OfferData) {
 function sortLowToHigh(a: OfferData, b: OfferData) {
   return a.price - b.price;
 }
+function sortByDate(a: Review, b: Review) {
+  const dateA = new Date(a.date).getTime();
+  const dateB = new Date(b.date).getTime();
+  return dateB - dateA;
+}
 
 export const sorting: Record<string, (offers: OfferData[]) => OfferData[]> =
 {
@@ -17,3 +22,5 @@ export const sorting: Record<string, (offers: OfferData[]) => OfferData[]> =
   'Price: low to high': (offers: OfferData[]) => offers.slice().sort(sortLowToHigh),
   'Top rated first': (offers: OfferData[]) => offers.slice().sort(sortByRating),
 };
+
+export const sortingReviews = (reviews: Review[]): Review[] => reviews.sort(sortByDate);
