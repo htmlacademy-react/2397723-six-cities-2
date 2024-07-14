@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { CitiesCard } from '../../components';
 import { OfferData } from '../../types';
 
@@ -6,7 +6,7 @@ type Props = {
   nearPlaces: OfferData[];
 }
 
-export function NearPlacesList({nearPlaces}: Props): React.JSX.Element {
+function NearPlacesListComponent({nearPlaces}: Props): React.JSX.Element {
   return (
     <div className="near-places__list places__list">
       {
@@ -20,3 +20,5 @@ export function NearPlacesList({nearPlaces}: Props): React.JSX.Element {
     </div>
   );
 }
+
+export const NearPlacesList = memo(NearPlacesListComponent);
