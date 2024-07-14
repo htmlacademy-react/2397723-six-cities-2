@@ -39,6 +39,7 @@ const ratingInputs: RatingInput[] = [
 
 const INITIAL_RATING = null;
 const MIN_COMMENT_LENGTH = 50;
+const MAX_COMMENT_LENGTH = 300;
 
 export function CommentForm({ offerId }: Props): React.JSX.Element {
   const dispatch = useAppDispatch();
@@ -73,6 +74,7 @@ export function CommentForm({ offerId }: Props): React.JSX.Element {
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={(event) => handleCommentChange(event.target.value)}
         value={comment}
+        maxLength={MAX_COMMENT_LENGTH}
       >
       </textarea>
       <div className="reviews__button-wrapper">
