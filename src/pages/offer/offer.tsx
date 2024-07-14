@@ -19,6 +19,8 @@ import { getReviews } from '../../store/reviews-data/reviews-data.selectors';
 import { getAuthorizationStatus } from '../../store/user-data/user-data.selectors';
 import { changeHoveredOffer } from '../../store/app-data/app-data';
 
+const MAX_IMAGE_COUNT = 6;
+
 export default function Offer(): React.JSX.Element | undefined {
   const dispatch = useAppDispatch();
   const offer = useAppSelector(getOffer);
@@ -52,7 +54,7 @@ export default function Offer(): React.JSX.Element | undefined {
           <section className="offer">
             <div className="offer__gallery-container container">
               <div className="offer__gallery">
-                {offer.images.map((image) => (
+                {offer.images.slice(0, MAX_IMAGE_COUNT - 1).map((image) => (
                   <div key={image} className="offer__image-wrapper">
                     <img className="offer__image" src={image} alt="Photo studio" />
                   </div>
