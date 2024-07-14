@@ -1,4 +1,4 @@
-import { FormEvent } from 'react';
+import { FormEvent, memo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addReview } from '../../store/api-actions';
 import { changeComment, changeRating } from '../../store/reviews-data/reviews-data';
@@ -41,7 +41,7 @@ const INITIAL_RATING = null;
 const MIN_COMMENT_LENGTH = 50;
 const MAX_COMMENT_LENGTH = 300;
 
-export function CommentForm({ offerId }: Props): React.JSX.Element {
+function CommentFormComponent({ offerId }: Props): React.JSX.Element {
   const dispatch = useAppDispatch();
   const isReviewSanding = useAppSelector(getIsReviewsLoading);
   const comment = useAppSelector(getNewReview).comment;
@@ -86,3 +86,5 @@ export function CommentForm({ offerId }: Props): React.JSX.Element {
     </form>
   );
 }
+
+export const CommentForm = memo(CommentFormComponent);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Review } from '../../types';
 import { ReviewsItem } from '../../components';
 
@@ -8,7 +8,7 @@ type Props = {
 
 const MAX_REVIEWS_COUNT = 10;
 
-export function ReviewsList({ reviews }: Props): React.JSX.Element {
+function ReviewsListComponent({ reviews }: Props): React.JSX.Element {
   const selectedReviews = reviews.slice(0, MAX_REVIEWS_COUNT);
 
   return (
@@ -22,3 +22,5 @@ export function ReviewsList({ reviews }: Props): React.JSX.Element {
     </ul>
   );
 }
+
+export const ReviewsList = memo(ReviewsListComponent);
