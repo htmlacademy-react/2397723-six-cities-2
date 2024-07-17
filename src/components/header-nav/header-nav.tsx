@@ -4,14 +4,15 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logout } from '../../store/api-actions';
 import { getFavorites } from '../../store/favorites-data/favorites-data.selectors';
 import { getAuthorizationStatus, getUser } from '../../store/user-data/user-data.selectors';
+import { memo } from 'react';
 
-export function HeaderNav(): React.JSX.Element {
+function HeaderNavComponent(): React.JSX.Element {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const favoritesLength = useAppSelector(getFavorites).length;
   const user = useAppSelector(getUser);
 
-  const logoutHandler = () => {
+  const handleLogout = () => {
     dispatch(logout());
   };
 
@@ -30,7 +31,7 @@ export function HeaderNav(): React.JSX.Element {
             </li>
             <li className="header__nav-item">
               <Link className="header__nav-link" to={AppRoute.Main}>
-                <span className="header__signout" onClick={logoutHandler}>Sign out</span>
+                <span className="header__signout" onClick={handleLogout}>Sign out</span>
               </Link>
             </li>
           </> :
@@ -43,3 +44,5 @@ export function HeaderNav(): React.JSX.Element {
     </nav>
   );
 }
+
+export const HeaderNav = memo(HeaderNavComponent);

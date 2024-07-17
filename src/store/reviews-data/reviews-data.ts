@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { NameSpaces } from '../../const/const';
 import { addReview, fetchReviews } from '../api-actions';
 import { Review } from '../../types';
+import { sortingReviews } from '../../utils';
 
 const initialState: {
   reviews: Review[];
@@ -40,7 +41,7 @@ export const reviewsData = createSlice({
         state.isReviewsLoading = true;
       })
       .addCase(fetchReviews.fulfilled, (state, action) => {
-        state.reviews = action.payload;
+        state.reviews = sortingReviews(action.payload);
         state.isReviewsLoading = false;
       })
       .addCase(fetchReviews.rejected, (state) => {
@@ -51,7 +52,7 @@ export const reviewsData = createSlice({
         state.isReviewSanding = true;
       })
       .addCase(addReview.fulfilled, (state, action) => {
-        state.reviews.push(action.payload);
+        state.reviews.unshift(action.payload);
         state.newReview.comment = '';
         state.newReview.rating = null;
         state.isReviewSanding = false;

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { CitiesTabsItem } from '../../components';
 import { Cities } from '../../const/const';
 
-export default function CitiesTabsList(): React.JSX.Element {
+function CitiesTabsListComponent(): React.JSX.Element {
   return (
     <>
       <h1 className="visually-hidden">Cities</h1>
@@ -20,3 +20,5 @@ export default function CitiesTabsList(): React.JSX.Element {
     </>
   );
 }
+
+export const CitiesTabsList = memo(CitiesTabsListComponent);

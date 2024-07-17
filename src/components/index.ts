@@ -11,7 +11,6 @@ export * from './header/header-layout';
 export * from './header-nav/header-nav';
 export * from './main-empty/main-empty';
 export * from './map/map';
-export * from './near-places-card/near-places-card';
 export * from './near-places-list/near-places-list';
 export * from './offer-bookmark-button/offer-bookmark-button';
 export * from './place-card-bookmark-button/place-card-bookmark-button';

@@ -54,10 +54,6 @@ export const SortOption: [string, string, string, string] = [
   'Top rated first'
 ];
 
-export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
-
-export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
-
 export const Cities: [City, City, City, City, City, City] = [
   {
     name: 'Paris',
@@ -109,5 +105,8 @@ export const Cities: [City, City, City, City, City, City] = [
   }
 ];
 
-export const INITIAL_ZOOM = 10;
+export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
 
+export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+
+export const MAX_NEAR_PLACES_COUNT = 3;

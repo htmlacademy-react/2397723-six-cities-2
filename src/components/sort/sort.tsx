@@ -3,10 +3,10 @@ import { SortOptions } from '../../components';
 import { useAppSelector } from '../../hooks';
 import { getActiveSort } from '../../store/app-data/app-data.selectors';
 
-export function Sort(): React.JSX.Element {
+function SortComponent(): React.JSX.Element {
+  const activeSort = useAppSelector(getActiveSort);
   const [showSort, setShowSort] = useState<boolean>(false);
   const closeSortOptions = () => setShowSort(false);
-  const activeSort = useAppSelector(getActiveSort);
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -25,3 +25,5 @@ export function Sort(): React.JSX.Element {
     </form>
   );
 }
+
+export const Sort = React.memo(SortComponent);

@@ -1,6 +1,5 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, memo } from 'react';
 import { Icon, Marker, layerGroup } from 'leaflet';
-import { OfferData } from '../../types';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const/const';
 import 'leaflet/dist/leaflet.css';
 import {
@@ -8,10 +7,13 @@ import {
   useMap
 } from '../../hooks';
 import { getActiveCity, getHoveredOffer } from '../../store/app-data/app-data.selectors';
+import classNames from 'classnames';
+import { OfferData } from '../../types';
 
 type Props = {
   offers: OfferData[];
-  renderingPage: string;
+  className: string;
+  currentOfferId?: string;
 };
 
 const defaultCustomIcon = new Icon({
@@ -26,10 +28,12 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-export function Map({ offers, renderingPage }: Props): React.JSX.Element {
-  const city = useAppSelector(getActiveCity);
+function MapComponent({ className, offers, currentOfferId }: Props): React.JSX.Element {
+  const activeCity = useAppSelector(getActiveCity);
   const hoveredOffer = useAppSelector(getHoveredOffer);
   const mapRef = useRef(null);
+  const markedIcon = currentOfferId ? currentOfferId : hoveredOffer?.id;
+  const city = className === 'cities__map' ? activeCity : offers[0].city;
   const map = useMap(mapRef, city);
 
   useEffect(() => {
@@ -49,7 +53,7 @@ export function Map({ offers, renderingPage }: Props): React.JSX.Element {
 
         marker
           .setIcon(
-            hoveredOffer !== undefined && offer.id === hoveredOffer.id
+            offer.id === markedIcon
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -60,7 +64,9 @@ export function Map({ offers, renderingPage }: Props): React.JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, hoveredOffer, city]);
+  }, [map, offers, hoveredOffer, markedIcon, city]);
 
-  return <section className={`${renderingPage}__map map`} ref={mapRef}></section>;
+  return <section className={classNames(className, 'map')} ref={mapRef}></section>;
 }
+
+export const Map = memo(MapComponent);

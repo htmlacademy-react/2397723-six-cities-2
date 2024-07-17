@@ -7,22 +7,25 @@ import {
   OfferBookmarkButton
 } from '../../components';
 import { ratingToPercent } from '../../utils';
-import { AppRoute, AuthorizationStatus, Page } from '../../const/const';
+import { AppRoute, AuthorizationStatus } from '../../const/const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchNearPlaces, fetchOffer, fetchReviews } from '../../store/api-actions';
 import { Helmet } from 'react-helmet-async';
 import { getOffer, getOfferError } from '../../store/offer-data/offer-data.selectors';
-import { getNearPlaces } from '../../store/near-places-data/near-places-data.selectors';
+import { getRandomNearPlaces } from '../../store/near-places-data/near-places-data.selectors';
 import { getReviews } from '../../store/reviews-data/reviews-data.selectors';
 import { getAuthorizationStatus } from '../../store/user-data/user-data.selectors';
+import { changeHoveredOffer } from '../../store/app-data/app-data';
+
+const MAX_IMAGE_COUNT = 6;
 
 export default function Offer(): React.JSX.Element | undefined {
   const dispatch = useAppDispatch();
   const offer = useAppSelector(getOffer);
   const offerError = useAppSelector(getOfferError);
-  const nearPlaces = useAppSelector(getNearPlaces);
+  const nearPlaces = useAppSelector(getRandomNearPlaces);
   const reviews = useAppSelector(getReviews);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const { id } = useParams();
@@ -30,6 +33,7 @@ export default function Offer(): React.JSX.Element | undefined {
 
   useEffect(() => {
     if (id) {
+      dispatch(changeHoveredOffer(undefined));
       dispatch(fetchOffer(id));
       dispatch(fetchNearPlaces(id));
       dispatch(fetchReviews(id));
@@ -41,6 +45,8 @@ export default function Offer(): React.JSX.Element | undefined {
   }
 
   if (offer) {
+    const mapPlaces = [...nearPlaces, offer];
+
     return (
       <>
         <Helmet title='Offer' />
@@ -48,7 +54,7 @@ export default function Offer(): React.JSX.Element | undefined {
           <section className="offer">
             <div className="offer__gallery-container container">
               <div className="offer__gallery">
-                {offer.images.map((image) => (
+                {offer.images.slice(0, MAX_IMAGE_COUNT - 1).map((image) => (
                   <div key={image} className="offer__image-wrapper">
                     <img className="offer__image" src={image} alt="Photo studio" />
                   </div>
@@ -107,7 +113,6 @@ export default function Offer(): React.JSX.Element | undefined {
                       </span>}
                   </div>
                   <div className="offer__description">
-                    {/* TODO каждое предложение в своем абзаце? */}
                     <p className="offer__text">
                       {offer.description}
                     </p>
@@ -120,15 +125,16 @@ export default function Offer(): React.JSX.Element | undefined {
                 </section>
               </div>
             </div>
-            <div style={{ padding: '0 58px' }}>
-              <Map offers={nearPlaces} renderingPage={Page.Offer} />
+            <div style={{ padding: '0 58px', maxWidth: '1144px', margin: 'auto' }}>
+              {nearPlaces && <Map offers={mapPlaces} className='offer__map' currentOfferId={offer.id}/>}
             </div>
           </section>
-          <div className="container">
-            <NearPlacesList
-              nearPlaces={nearPlaces}
-            />
-          </div>
+          <section className="near-places places">
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <div className="container">
+              {nearPlaces && <NearPlacesList nearPlaces={nearPlaces} />}
+            </div>
+          </section>
         </main>
       </>
     );

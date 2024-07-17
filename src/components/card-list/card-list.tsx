@@ -1,17 +1,20 @@
-import { OfferData } from '../../types';
 import { CitiesCard } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeHoveredOffer } from '../../store/app-data/app-data';
+import { getSortedOffers } from '../../store/offers-data/offers-data.selectors';
 
-type Props = {
-  offers: OfferData[];
-}
+export function CitiesCardList(): React.JSX.Element {
+  const dispatch = useAppDispatch();
+  const offers = useAppSelector(getSortedOffers);
 
-export function CitiesCardList({ offers }: Props): React.JSX.Element {
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
         <CitiesCard
           key={offer.id}
           offer={offer}
+          className='cities'
+          onMouseEnter={() => dispatch(changeHoveredOffer(offer))}
         />
       ))}
     </div>

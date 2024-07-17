@@ -10,6 +10,7 @@ type Props = {
 
 export default function FavoritesList({ favoriteOffers }: Props): React.JSX.Element {
   const cities = Object.values(CityName);
+
   return (
     <ul className="favorites__list">
       {cities.map((name: CityName) => {

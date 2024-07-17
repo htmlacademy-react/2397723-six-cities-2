@@ -46,13 +46,3 @@ export type FullOffer = {
   bedrooms: number;
   maxAdults: number;
 }
-//TODO не смог разобраться с объединением типов. В компоненте Offer вылезает ошибка типов
-// type ExtendOffer = {
-//   description: string;
-//   images: string[];
-//   goods: string[];
-//   host: Host;
-//   bedrooms: number;
-//   maxAdults: number;
-// }
-// export type FullOffer = OfferData & ExtendOffer

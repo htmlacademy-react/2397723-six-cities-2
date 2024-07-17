@@ -1,14 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpaces } from '../../const/const';
+import { MAX_NEAR_PLACES_COUNT, NameSpaces } from '../../const/const';
 import { OfferData } from '../../types';
 import { fetchNearPlaces, setFavoriteStatus } from '../api-actions';
+import { getRandomNearPlaces } from '../../utils';
 
 const initialState: {
   nearPlaces: OfferData[];
+  randomNearPlaces: OfferData[];
   isNearPlacesLoading: boolean;
   hasError: boolean;
 } = {
   nearPlaces: [],
+  randomNearPlaces: [],
   isNearPlacesLoading: false,
   hasError: false
 };
@@ -24,6 +27,7 @@ export const nearPlacesData = createSlice({
       })
       .addCase(fetchNearPlaces.fulfilled, (state, action) => {
         state.nearPlaces = action.payload;
+        state.randomNearPlaces = getRandomNearPlaces(MAX_NEAR_PLACES_COUNT, state.nearPlaces);
         state.isNearPlacesLoading = false;
       })
       .addCase(fetchNearPlaces.rejected, (state) => {
