@@ -54,7 +54,7 @@ export default function Offer(): React.JSX.Element | undefined {
           <section className="offer">
             <div className="offer__gallery-container container">
               <div className="offer__gallery">
-                {offer.images.slice(0, MAX_IMAGE_COUNT - 1).map((image) => (
+                {offer.images.slice(0, MAX_IMAGE_COUNT).map((image) => (
                   <div key={image} className="offer__image-wrapper">
                     <img className="offer__image" src={image} alt="Photo studio" />
                   </div>
