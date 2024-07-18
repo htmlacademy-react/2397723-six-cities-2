@@ -15,6 +15,7 @@ export function PlaceCardBookmarkButton({ offerId, status }: Props): React.JSX.E
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
+  const isFavorite = isAuth && status;
 
   const handleAddFavorite = () => {
     dispatch(setFavoriteStatus({ offerId, status }));
@@ -26,7 +27,7 @@ export function PlaceCardBookmarkButton({ offerId, status }: Props): React.JSX.E
 
   return (
     <button
-      className={`${status ? 'place-card__bookmark-button--active' : ''} place-card__bookmark-button button`}
+      className={`${isFavorite ? 'place-card__bookmark-button--active' : ''} place-card__bookmark-button button`}
       type="button"
       onClick={isAuth ? handleAddFavorite : handleRedirectToLogin}
     >

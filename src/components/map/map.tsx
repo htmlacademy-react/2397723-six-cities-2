@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, memo } from 'react';
 import { Icon, Marker, layerGroup } from 'leaflet';
-import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const/const';
 import 'leaflet/dist/leaflet.css';
+import URL_MARKER_DEFAULT from '../../img/pin.svg';
+import URL_MARKER_CURRENT from '../../img/pin-active.svg';
 import {
   useAppSelector,
   useMap
